@@ -2,5 +2,19 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
+    <Authors>Jiří Tůma</Authors>
+    <Company>Olbrasoft</Company>
+    <Description>Classes for working with data</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>olbrasoft-data.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+    <PackageTags>OrderBy Direction</PackageTags>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\olbrasoft-data.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
 </Project>
