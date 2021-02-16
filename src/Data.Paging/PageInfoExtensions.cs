@@ -1,0 +1,15 @@
+﻿using Olbrasoft.Data.Paging;
+using System;
+
+namespace Olbrasoft.Extensions.Data
+{
+    public static class PageInfoExtensions
+    {
+        public static int CalculateSkip(this IPageInfo pageInfo)
+        {
+            if (pageInfo is null) throw new ArgumentNullException(nameof(pageInfo));
+
+            return (pageInfo.NumberOfSelectedPage - 1) * pageInfo.PageSize;
+        }
+    }
+};

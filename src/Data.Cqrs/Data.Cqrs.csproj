@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;netstandard1.6;</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <nullable>enable</nullable>
+    <AssemblyName>Olbrasoft.Data.Cqrs</AssemblyName>
+    <RootNamespace>Olbrasoft.Data.Cqrs</RootNamespace>
+    <Authors>Jiří Tůma</Authors>
+    <Company>Olbrasoft</Company>
+    <Description>Extensions project Dispatching to CQRS. Distribution RequestHandler to CommandHandler with mapper and QueryHandler with projector</Description>
+    <Copyright>Copyright @2021 Olbrasoft</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
+    <PackageIcon>olbrasoft-data-cqrs.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>CQS CQRS Queries Commands Handlers</PackageTags>
+    <Version>1.0.3</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Olbrasoft.Data.Paging" Version="1.0.0" />
+    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.3" />
+    <PackageReference Include="Olbrasoft.Dispatching.Abstractions" Version="1.0.2" />
+    <PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\olbrasoft-data-cqrs.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>

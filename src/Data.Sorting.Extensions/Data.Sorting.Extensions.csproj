@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
+    <LangVersion>8.0</LangVersion>
+    <nullable>enable</nullable>
+    <AssemblyName>Olbrasoft.Data.Sorting.Extensions</AssemblyName>
+    <RootNamespace>Olbrasoft.Data.Sorting.Extensions</RootNamespace>
+    <Authors>Jiří Tůma</Authors>
+    <Company>Olbrasoft</Company>
+    <Description>Extensions sorting</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright @2021 Olbrasoft</Copyright>
+    <PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
+    <PackageIcon>olbrasoft-data-sorting.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Data Sorting Extensions</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.3" />
+  </ItemGroup>
+</Project>

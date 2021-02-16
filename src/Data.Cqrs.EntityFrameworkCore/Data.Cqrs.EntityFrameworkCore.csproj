@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <nullable>enable</nullable>
+    <AssemblyName>Olbrasoft.Data.Cqrs.EntityFrameworkCore</AssemblyName>
+    <Copyright>Copyright @2021 Olbrasoft</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
+    <PackageIcon>olbrasoft-data-cqrs-entityFrameworkCore.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>CQS CQRS Queries Commands Handlers</PackageTags>
+    <Authors>Jiří Tůma</Authors>
+    <Company>Olbrasoft</Company>
+    <Description>CQS and CQRS for EntityFrameworkCore</Description>
+    <Version>1.0.1</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
+    <PackageReference Include="Olbrasoft.Data.Cqrs" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\olbrasoft-data-cqrs-entityFrameworkCore.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+</Project>
