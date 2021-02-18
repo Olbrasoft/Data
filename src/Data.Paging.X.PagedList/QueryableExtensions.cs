@@ -16,10 +16,10 @@ namespace Olbrasoft.Data.Paging.X.PagedList
 
         public static IPagedList<TSource> AsPagedList<TSource>(this IQueryable<TSource> source, IPageInfo paging)
         {
-            if (source == null)
+            if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (paging == null)
+            if (paging is null)
                 throw new ArgumentNullException(nameof(paging));
 
             var pagedList = new PagedList<TSource>(source, paging.NumberOfSelectedPage, paging.PageSize);

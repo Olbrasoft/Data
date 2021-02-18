@@ -7,10 +7,10 @@ namespace Olbrasoft.Data.Paging.X.PagedList
     {
         public static IPagedList<T> AsPagedList<T>(this IBasicPagedResult<T> source, IPageInfo paging)
         {
-            if (source == null)
+            if (source is null)
                 throw new ArgumentNullException(nameof(source));
 
-            if (paging == null)
+            if (paging is null)
                 throw new ArgumentNullException(nameof(paging));
 
             return new SimplePagedList<T>(source, paging.NumberOfSelectedPage, paging.PageSize, source.TotalCount);
