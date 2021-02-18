@@ -2,10 +2,8 @@
  
 
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/) Olbrasoft.Data.Paging 
-  
-  ![test](https://github.com/favicon.ico)
 
-  <img src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="250" height="250"/>
+  <img src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="100" height="100"/>
 
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting/) Olbrasoft.Data.Sorting
 
