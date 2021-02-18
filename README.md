@@ -5,7 +5,7 @@
   
   ![test](https://github.com/favicon.ico)
 
-  ![Olbrasoft.Data.Paging](https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png| width=48)
+  ![](https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png)
 
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting/) Olbrasoft.Data.Sorting
 
