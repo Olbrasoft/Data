@@ -10,3 +10,7 @@
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs/) Olbrasoft.Data.Cqrs
     
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCore/) Olbrasoft.Data.Cqrs.EntityFrameworkCore
+
+  [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.X.PagedList.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging.X.PagedList/) Olbrasoft.Data.Paging.X.PagedList
+
+ 
