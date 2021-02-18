@@ -1,7 +1,7 @@
 [![AppVeyor build status](https://img.shields.io/appveyor/build/Olbrasoft/data/master.svg)](https://ci.appveyor.com/project/Olbrasoft/data) Data
  
 
-  <img alt="Olbrasoft.Data.Paging" style="padding: 0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="35" height="35" align="left"/> [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/) Olbrasoft.Data.Paging 
+  <img alt="Olbrasoft.Data.Paging" style="display: block; margin-left: auto; margin-right: auto;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="35" height="35" align="left"/> [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/) Olbrasoft.Data.Paging 
 
  
 
