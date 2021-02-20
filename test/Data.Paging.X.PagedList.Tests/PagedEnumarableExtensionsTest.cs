@@ -3,21 +3,22 @@ using Olbrasoft.Data.Paging;
 using Olbrasoft.Data.Paging.X.PagedList;
 using Olbrasoft.Extensions.Paging;
 using System;
+using System.Collections.Generic;
 using X.PagedList;
 using Xunit;
 
 namespace Data.Paging.X.PagedList.Tests
 {
-    public class BasicPagedResultExtensionsTest
+    public class PagedEnumarableExtensionsTest
     {
         [Fact]
         public void AsPagedList_Return_IPagedList()
         {
             //Arrange
-            var resultMock = new Mock<IBasicPagedResult<object>>();
+            var pagedEnumerable = new List<object>().AsPagedEnumerable();
 
             //Act
-            var list = resultMock.Object.AsPagedList(new PageInfo());
+            var list = pagedEnumerable.AsPagedList(new PageInfo());
 
             //Assert
             Assert.IsAssignableFrom<IPagedList<object>>(list);
@@ -27,7 +28,7 @@ namespace Data.Paging.X.PagedList.Tests
         public void Source_ArgumentNullException()
         {
             //Arrange
-            IBasicPagedResult<object> result = null;
+            IPagedEnumerable<object> result = null;
             var expectedParameterName = "source";
 
             try //Act
@@ -46,7 +47,7 @@ namespace Data.Paging.X.PagedList.Tests
         public void Paging_ArgumentNullException()
         {
             //Arrange
-            var resultMock = new Mock<IBasicPagedResult<object>>();
+            var resultMock = new Mock<IPagedEnumerable<object>>();
             var expectedParameterName = "paging";
 
             try //Act

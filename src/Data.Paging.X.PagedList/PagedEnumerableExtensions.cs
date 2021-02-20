@@ -5,9 +5,9 @@ using X.PagedList;
 
 namespace Olbrasoft.Extensions.Paging
 {
-    public static class BasicPagedResultExtensions
+    public static class PagedEnumerableExtensions
     {
-        public static IPagedList<T> AsPagedList<T>(this IBasicPagedResult<T> source, IPageInfo paging)
+        public static IPagedList<T> AsPagedList<T>(this IPagedEnumerable<T> source, IPageInfo paging)
         {
             if (source is null)
                 throw new ArgumentNullException(nameof(source));

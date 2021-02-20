@@ -14,6 +14,9 @@ namespace Olbrasoft.Data.Paging.X.PagedList
             if (subSet is null)
                 throw new ArgumentNullException(nameof(subSet));
 
+            if (Subset is null)
+                throw new ArgumentNullException(nameof(Subset));
+
             Subset.AddRange(subSet);
         }
     }
