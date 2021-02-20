@@ -72,10 +72,11 @@ namespace Olbrasoft.Data.Paging
         public void Set_TotalCount()
         {
             //Arrange
-            var result = new PagedEnumerable<object>(new List<object> { new object() });
-
-            //Act
-            result.TotalCount = 5;
+            var result = new PagedEnumerable<object>(new List<object> { new object() })
+            {
+                //Act
+                TotalCount = 5
+            };
 
             //Assert
             Assert.True(result.TotalCount == 5);
