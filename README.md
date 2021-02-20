@@ -6,7 +6,7 @@
 
 ## Olbrasoft.Data.Sorting.Extensions  [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.Extensions.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting.Extensions/)
 
-## <img align="left" alt="Olbrasoft.Data.Cqrs" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-cqrs.png" width="45" height="45"/> Olbrasoft.Data.Cqrs [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs/)  
+## <img align="left" alt="Olbrasoft.Data.Cqrs" style="float: left;  display: block; margin: 0px, 0px, 0px, 15px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-cqrs.png" width="45" height="45"/> Olbrasoft.Data.Cqrs [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs/)  
     
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCore/) Olbrasoft.Data.Cqrs.EntityFrameworkCore
   
