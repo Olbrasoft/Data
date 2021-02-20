@@ -3,7 +3,8 @@
 ## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="45" height="45"/> Data.Paging
 ### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/) Olbrasoft.Data.Paging
 
-## <img align="left" alt="Olbrasoft.Data.Sorting" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-sorting.png" width="45" height="45"/> Olbrasoft.Data.Sorting [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting/) 
+## <img align="left" alt="Olbrasoft.Data.Sorting" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-sorting.png" width="45" height="45"/> Data.Sorting
+### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting/) Olbrasoft.Data.Sorting
 
 ## Olbrasoft.Data.Sorting.Extensions  [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.Extensions.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting.Extensions/)
 
