@@ -1,6 +1,7 @@
 # [![AppVeyor build status](https://img.shields.io/appveyor/build/Olbrasoft/data/master.svg)](https://ci.appveyor.com/project/Olbrasoft/data) Data 
  
-## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="45" height="45"/>  Olbrasoft.Data.Paging  [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/)
+## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-paging.png" width="45" height="45"/> Data.Paging
+### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging/) Olbrasoft.Data.Paging
 
 ## <img align="left" alt="Olbrasoft.Data.Sorting" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-sorting.png" width="45" height="45"/> Olbrasoft.Data.Sorting [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Sorting.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Sorting/) 
 
@@ -10,7 +11,7 @@
     
   [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCore/) Olbrasoft.Data.Cqrs.EntityFrameworkCore
   
-  ## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;  display: block; margin: 0px 0px 20px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-x-pagedList.png" width="45" height="45"/> Paging.X.PagedList
+ ## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;  display: block; margin: 0px 0px 20px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-x-pagedList.png" width="45" height="45"/> Paging.X.PagedList
  ### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.X.PagedList.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging.X.PagedList/)  Olbrasoft.Data.Paging.X.PagedList
 
 

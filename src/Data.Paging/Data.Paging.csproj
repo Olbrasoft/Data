@@ -16,6 +16,7 @@
     <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Data Paging Pagination Paged Result</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
