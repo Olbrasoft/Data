@@ -2,7 +2,7 @@
 
 namespace Olbrasoft.Data.Paging
 {
-    public interface IBasicPagedResult<T> : IList<T>
+    public interface IPagedEnumerable<T> : IEnumerable<T>
     {
         int TotalCount { get; }
     }

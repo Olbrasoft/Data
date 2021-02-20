@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Olbrasoft.Data.Paging;
 using Olbrasoft.Data.Paging.X.PagedList;
+using Olbrasoft.Extensions.Paging;
 using System;
 using X.PagedList;
 using Xunit;

@@ -2,7 +2,7 @@
 
 namespace Olbrasoft.Data.Paging
 {
-    public class PagedResult<TRecord> : BasicPagedResult<TRecord>, IPagedResult<TRecord>
+    internal class PagedResult<TRecord> : PagedEnumerable<TRecord>, IPagedResult<TRecord>
     {
         public PagedResult(IEnumerable<TRecord> items) : base(items)
         {

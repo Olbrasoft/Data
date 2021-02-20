@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Olbrasoft.Data.Paging.Tests")]
 
 namespace Olbrasoft.Data.Paging
 {
-    public class BasicPagedResult<T> : List<T>, IBasicPagedResult<T>
+    internal class PagedEnumerable<T> : List<T>, IPagedEnumerable<T>
     {
         private int _totalCount;
 
-        public BasicPagedResult(IEnumerable<T> items)
+        public PagedEnumerable(IEnumerable<T> items)
         {
             AddRange(items);
         }

@@ -1,4 +1,4 @@
-﻿using Olbrasoft.Extensions.Data;
+﻿using Olbrasoft.Extensions.Paging;
 using System;
 using Xunit;
 

@@ -4,16 +4,16 @@ using Xunit;
 
 namespace Olbrasoft.Data.Paging
 {
-    public class BasicPagedResultTest
+    public class PagedEnumerableTest
     {
         [Fact]
-        public void Instance_Implement_Interface_IBasicPagedResult()
+        public void Instance_Implement_Interface_IPagedEnumerable()
         {
             //Arrange
-            var type = typeof(IBasicPagedResult<object>);
+            var type = typeof(IPagedEnumerable<object>);
 
             //Act
-            var result = new BasicPagedResult<object>(new List<object>());
+            var result = new PagedEnumerable<object>(new List<object>());
 
             //Assert
             Assert.IsAssignableFrom(type, result);
@@ -26,7 +26,7 @@ namespace Olbrasoft.Data.Paging
             var type = typeof(List<object>);
 
             //Act
-            var result = new BasicPagedResult<object>(new List<object>());
+            var result = new PagedEnumerable<object>(new List<object>());
 
             //Assert
             Assert.IsAssignableFrom(type, result);
@@ -36,7 +36,7 @@ namespace Olbrasoft.Data.Paging
         public void Have_TotalCount_Type_Of_Integer()
         {
             //Arrange
-            var result = new BasicPagedResult<object>(new List<object>());
+            var result = new PagedEnumerable<object>(new List<object>());
 
             //Act
             var totalCount = result.TotalCount;
@@ -49,7 +49,7 @@ namespace Olbrasoft.Data.Paging
         public void Auto_Set_TotalCount_If_Count_Is_Bigger_Than_TotalCount()
         {
             //Arrange
-            var result = new BasicPagedResult<object>(new List<object> { new object() });
+            var result = new PagedEnumerable<object>(new List<object> { new object() });
 
             //Act
             var totalCount = result.TotalCount;
@@ -62,7 +62,7 @@ namespace Olbrasoft.Data.Paging
         public void Exception_When_Entering_The_TotalCount_Less_Than_The_Count()
         {
             //Arrange
-            var result = new BasicPagedResult<object>(new List<object> { new object() });
+            var result = new PagedEnumerable<object>(new List<object> { new object() });
 
             //Act and Assert
             Assert.Throws<Exception>(() => result.TotalCount = 0);
@@ -72,7 +72,7 @@ namespace Olbrasoft.Data.Paging
         public void Set_TotalCount()
         {
             //Arrange
-            var result = new BasicPagedResult<object>(new List<object> { new object() });
+            var result = new PagedEnumerable<object>(new List<object> { new object() });
 
             //Act
             result.TotalCount = 5;

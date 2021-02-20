@@ -1,7 +1,7 @@
 ﻿using Olbrasoft.Data.Paging;
 using System;
 
-namespace Olbrasoft.Extensions.Data
+namespace Olbrasoft.Extensions.Paging
 {
     public static class PageInfoExtensions
     {

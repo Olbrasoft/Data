@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Olbrasoft.Data.Paging;
+using Olbrasoft.Data.Paging.X.PagedList;
+using System;
 using System.Linq;
 using X.PagedList;
 
-namespace Olbrasoft.Data.Paging.X.PagedList
+namespace Olbrasoft.Extensions.Paging
 {
     public static class QueryableExtensions
     {

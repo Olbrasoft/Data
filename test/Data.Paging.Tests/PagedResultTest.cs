@@ -22,7 +22,7 @@ namespace Olbrasoft.Data.Paging
         public void Instance_Inherit_From_BasicPagedResult()
         {
             //Arrange
-            var type = typeof(BasicPagedResult<object>);
+            var type = typeof(PagedEnumerable<object>);
 
             //Act
             var result = new PagedResult<object>(new List<object>());
