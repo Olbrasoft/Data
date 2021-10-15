@@ -1,4 +1,4 @@
-﻿namespace Olbrasoft.Data
+﻿namespace Olbrasoft.Data.Sorting
 {
     public enum OrderDirection
     {

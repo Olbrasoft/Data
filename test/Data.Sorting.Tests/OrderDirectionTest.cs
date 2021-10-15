@@ -1,5 +1,6 @@
 ﻿using Olbrasoft.Data;
 using System;
+using Olbrasoft.Data.Sorting;
 using Xunit;
 
 namespace Data.Sorting.Tests

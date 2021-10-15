@@ -16,10 +16,11 @@
     <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Data Sorting Extensions</PackageTags>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.3" />
+    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.4" />
   </ItemGroup>
 
   <ItemGroup>

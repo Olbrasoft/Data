@@ -1,6 +1,7 @@
-﻿using Olbrasoft.Data.Paging;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Olbrasoft.Data.Paging;
 
+// ReSharper disable once CheckNamespace
 namespace Olbrasoft.Extensions.Paging
 {
     public static class EnumerableExtensions

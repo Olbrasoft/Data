@@ -1,6 +1,7 @@
 ﻿using Olbrasoft.Data.Paging;
 using System;
 
+// ReSharper disable once CheckNamespace
 namespace Olbrasoft.Extensions.Paging
 {
     public static class PageInfoExtensions
