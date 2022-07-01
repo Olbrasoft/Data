@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using X.PagedList;
 
 [assembly: InternalsVisibleTo("Data.Paging.X.PagedList.Tests")]
 
-namespace Olbrasoft.Data.Paging.X.PagedList
+namespace Olbrasoft.Data.Paging.X.PagedList;
+
+internal class SimplePagedList<T> : BasePagedList<T>
 {
-    internal class SimplePagedList<T> : BasePagedList<T>
+    public SimplePagedList(IEnumerable<T> subSet, int pageNumber, int pageSize, int totalItemCount) : base(pageNumber, pageSize, totalItemCount)
     {
-        public SimplePagedList(IEnumerable<T> subSet, int pageNumber, int pageSize, int totalItemCount) : base(pageNumber, pageSize, totalItemCount)
-        {
-            if (subSet is null)
-                throw new ArgumentNullException(nameof(subSet));
+        if (subSet is null)
+            throw new ArgumentNullException(nameof(subSet));
 
-            if (Subset is null)
-                throw new ArgumentNullException(nameof(Subset));
+        if (Subset is null)
+            throw new ArgumentNullException(nameof(Subset));
 
-            Subset.AddRange(subSet);
-        }
+        Subset.AddRange(subSet);
     }
 }

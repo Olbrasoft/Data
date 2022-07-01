@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.1;net5.0;Net6</TargetFrameworks>
+	<LangVersion>10.0</LangVersion>
     <AssemblyName>Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc</AssemblyName>
     <RootNamespace>Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc</RootNamespace>
     <Authors>Jiří Tůma</Authors>
@@ -12,13 +13,18 @@
     <PackageIcon>olbrasoft-data-x-pagedList.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
-    <Version>1.0.4</Version>
+    <Version>1.0.6</Version>
     <PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
   </PropertyGroup>
 
+	<ItemGroup>
+		<Using Include="System.Linq" />
+		<Using Include="System.Collections.Generic" />
+	</ItemGroup>
+	
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
-    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.1.0" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
   </ItemGroup>
 
   <ItemGroup>

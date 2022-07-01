@@ -1,116 +1,115 @@
-namespace Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc
+namespace Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc;
+
+///<summary>
+/// Options for configuring the output of <see cref = "HtmlHelper" />.
+///</summary>
+public partial class PagedListRenderOptions
 {
-    ///<summary>
-    /// Options for configuring the output of <see cref = "HtmlHelper" />.
-    ///</summary>
-    public partial class PagedListRenderOptions
+    private const string _defaultContainerHtmlTag = "nav";
+
+    private static readonly string[] _defaultUlElementClasses = { "pagination" };
+
+    private static readonly string[] _defaultLiElementClasses = { "page-item" };
+
+    private static readonly string[] _defaultAhrefElementClasses = { "page-link" };
+
+    private const string _defaultLinkToPreviousPageFormat = "Previous";
+
+    private const string _defaultLinkToNextPageFormat = "Next";
+
+    private const string _defaultLinkToFirstPageFormat = "First";
+
+    private const string _defaultLinkToLastPageFormat = "Last";
+
+    private static void SetBootstrap4Option(PagedListRenderOptions option)
     {
-        private const string _defaultContainerHtmlTag = "nav";
+        option.ContainerHtmlTag = _defaultContainerHtmlTag;
+        option.UlElementClasses = _defaultUlElementClasses;
+        option.LiElementClasses = _defaultLiElementClasses;
+        option.AhrefElementClasses = _defaultAhrefElementClasses;
+        option.LinkToPreviousPageFormat = _defaultLinkToPreviousPageFormat;
+        option.LinkToNextPageFormat = _defaultLinkToNextPageFormat;
+        option.LinkToFirstPageFormat = _defaultLinkToFirstPageFormat;
+        option.LinkToLastPageFormat = _defaultLinkToLastPageFormat;
+    }
 
-        private static readonly string[] _defaultUlElementClasses = { "pagination" };
-
-        private static readonly string[] _defaultLiElementClasses = { "page-item" };
-
-        private static readonly string[] _defaultAhrefElementClasses = { "page-link" };
-
-        private const string _defaultLinkToPreviousPageFormat = "Previous";
-
-        private const string _defaultLinkToNextPageFormat = "Next";
-
-        private const string _defaultLinkToFirstPageFormat = "First";
-
-        private const string _defaultLinkToLastPageFormat = "Last";
-
-        private static void SetBootstrap4Option(PagedListRenderOptions option)
+    /// <summary>
+    /// Only show Previous and Next links.
+    /// </summary>
+    public static PagedListRenderOptions Bootstrap4Minimal
+    {
+        get
         {
-            option.ContainerHtmlTag = _defaultContainerHtmlTag;
-            option.UlElementClasses = _defaultUlElementClasses;
-            option.LiElementClasses = _defaultLiElementClasses;
-            option.AhrefElementClasses = _defaultAhrefElementClasses;
-            option.LinkToPreviousPageFormat = _defaultLinkToPreviousPageFormat;
-            option.LinkToNextPageFormat = _defaultLinkToNextPageFormat;
-            option.LinkToFirstPageFormat = _defaultLinkToFirstPageFormat;
-            option.LinkToLastPageFormat = _defaultLinkToLastPageFormat;
+            var option = new PagedListRenderOptions();
+
+            SetBootstrap4Option(option);
+            SetMinimalOption(option);
+
+            return option;
         }
+    }
 
-        /// <summary>
-        /// Only show Previous and Next links.
-        /// </summary>
-        public static PagedListRenderOptions Bootstrap4Minimal
+    /// <summary>
+    /// Only show Page Numbers.
+    /// </summary>
+    public static PagedListRenderOptions Bootstrap4PageNumbersOnly
+    {
+        get
         {
-            get
-            {
-                var option = new PagedListRenderOptions();
+            var option = new PagedListRenderOptions();
 
-                SetBootstrap4Option(option);
-                SetMinimalOption(option);
+            SetBootstrap4Option(option);
+            SetPageNumbersOnlyOption(option);
 
-                return option;
-            }
+            return option;
         }
+    }
 
-        /// <summary>
-        /// Only show Page Numbers.
-        /// </summary>
-        public static PagedListRenderOptions Bootstrap4PageNumbersOnly
+    /// <summary>
+    /// Show Page Numbers plus Previous and Next links.
+    /// </summary>
+    public static PagedListRenderOptions Bootstrap4PageNumbersPlusPrevAndNext
+    {
+        get
         {
-            get
-            {
-                var option = new PagedListRenderOptions();
+            var option = new PagedListRenderOptions();
 
-                SetBootstrap4Option(option);
-                SetPageNumbersOnlyOption(option);
+            SetBootstrap4Option(option);
+            SetPageNumbersPlusPrevAndNextOption(option);
 
-                return option;
-            }
+            return option;
         }
+    }
 
-        /// <summary>
-        /// Show Page Numbers plus Previous and Next links.
-        /// </summary>
-        public static PagedListRenderOptions Bootstrap4PageNumbersPlusPrevAndNext
+    /// <summary>
+    /// Show Page Numbers plus First and Last links.
+    /// </summary>
+    public static PagedListRenderOptions Bootstrap4PageNumbersPlusFirstAndLast
+    {
+        get
         {
-            get
-            {
-                var option = new PagedListRenderOptions();
+            var option = new PagedListRenderOptions();
 
-                SetBootstrap4Option(option);
-                SetPageNumbersPlusPrevAndNextOption(option);
+            SetBootstrap4Option(option);
+            SetPageNumbersPlusFirstAndLastOption(option);
 
-                return option;
-            }
+            return option;
         }
+    }
 
-        /// <summary>
-        /// Show Page Numbers plus First and Last links.
-        /// </summary>
-        public static PagedListRenderOptions Bootstrap4PageNumbersPlusFirstAndLast
+    /// <summary>
+    /// Show Page Numbers plus Previous, Next, First and Last links.
+    /// </summary>
+    public static PagedListRenderOptions Bootstrap4Full
+    {
+        get
         {
-            get
-            {
-                var option = new PagedListRenderOptions();
+            var option = new PagedListRenderOptions();
 
-                SetBootstrap4Option(option);
-                SetPageNumbersPlusFirstAndLastOption(option);
+            SetBootstrap4Option(option);
+            SetFullOption(option);
 
-                return option;
-            }
-        }
-
-        /// <summary>
-        /// Show Page Numbers plus Previous, Next, First and Last links.
-        /// </summary>
-        public static PagedListRenderOptions Bootstrap4Full
-        {
-            get
-            {
-                var option = new PagedListRenderOptions();
-
-                SetBootstrap4Option(option);
-                SetFullOption(option);
-
-                return option;
-            }
+            return option;
         }
     }
 }

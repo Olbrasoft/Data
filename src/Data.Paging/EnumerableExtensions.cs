@@ -1,34 +1,32 @@
-﻿using System.Collections.Generic;
-using Olbrasoft.Data.Paging;
+﻿using Olbrasoft.Data.Paging;
 
 // ReSharper disable once CheckNamespace
-namespace Olbrasoft.Extensions.Paging
+namespace Olbrasoft.Extensions.Paging;
+
+public static class EnumerableExtensions
 {
-    public static class EnumerableExtensions
+    public static IPagedEnumerable<T> AsPagedEnumerable<T>(this IEnumerable<T> items)
     {
-        public static IPagedEnumerable<T> AsPagedEnumerable<T>(this IEnumerable<T> items)
-        {
-            return new PagedEnumerable<T>(items);
-        }
+        return new PagedEnumerable<T>(items);
+    }
 
-        public static IPagedEnumerable<T> AsPagedEnumerable<T>(this IEnumerable<T> items, int totalCount)
-        {
-            return new PagedEnumerable<T>(items) { TotalCount = totalCount };
-        }
+    public static IPagedEnumerable<T> AsPagedEnumerable<T>(this IEnumerable<T> items, int totalCount)
+    {
+        return new PagedEnumerable<T>(items) { TotalCount = totalCount };
+    }
 
-        public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items)
-        {
-            return new PagedResult<T>(items);
-        }
+    public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items)
+    {
+        return new PagedResult<T>(items);
+    }
 
-        public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items, int totalCount)
-        {
-            return new PagedResult<T>(items) { TotalCount = totalCount };
-        }
+    public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items, int totalCount)
+    {
+        return new PagedResult<T>(items) { TotalCount = totalCount };
+    }
 
-        public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items, int totalCount, int filteredCount)
-        {
-            return new PagedResult<T>(items) { TotalCount = totalCount, FilteredCount = filteredCount };
-        }
+    public static IPagedResult<T> AsPagedResult<T>(this IEnumerable<T> items, int totalCount, int filteredCount)
+    {
+        return new PagedResult<T>(items) { TotalCount = totalCount, FilteredCount = filteredCount };
     }
 }

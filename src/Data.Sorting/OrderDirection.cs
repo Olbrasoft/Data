@@ -1,8 +1,7 @@
-﻿namespace Olbrasoft.Data.Sorting
+﻿namespace Olbrasoft.Data.Sorting;
+
+public enum OrderDirection
 {
-    public enum OrderDirection
-    {
-        Asc,
-        Desc
-    }
+    Asc,
+    Desc
 }

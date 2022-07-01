@@ -1,9 +1,6 @@
-﻿using System.Collections.Generic;
+﻿namespace Olbrasoft.Data.Paging;
 
-namespace Olbrasoft.Data.Paging
+public interface IPagedEnumerable<T> : IEnumerable<T>
 {
-    public interface IPagedEnumerable<T> : IEnumerable<T>
-    {
-        int TotalCount { get; }
-    }
+    int TotalCount { get; }
 }

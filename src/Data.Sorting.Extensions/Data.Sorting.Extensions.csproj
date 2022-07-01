@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;Net6</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
     <nullable>enable</nullable>
     <AssemblyName>Olbrasoft.Data.Sorting.Extensions</AssemblyName>
     <RootNamespace>Olbrasoft.Data.Sorting.Extensions</RootNamespace>
@@ -20,7 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.4" />
+    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.6" />
   </ItemGroup>
 
   <ItemGroup>

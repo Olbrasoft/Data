@@ -1,5 +1,6 @@
 ﻿using Data.Sorting.Tests;
 using Olbrasoft.Data;
+using Olbrasoft.Data.Sorting;
 using Olbrasoft.Extensions.Linq;
 using System.Collections.Generic;
 using System.Linq;

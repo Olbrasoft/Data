@@ -1,28 +1,34 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;netstandard1.6;</TargetFrameworks>
-    <LangVersion>8.0</LangVersion>
-    <nullable>enable</nullable>
-    <AssemblyName>Olbrasoft.Data.Paging</AssemblyName>
-    <RootNamespace>Olbrasoft.Data.Paging</RootNamespace>
-    <Authors>Jiří Tůma</Authors>
-    <Company>Olbrasoft</Company>
-    <Description>Interfaces and classes for paged data</Description>
-    <Copyright>Copyright @2021 Olbrasoft</Copyright>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
-    <PackageIcon>olbrasoft-data-paging.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
-    <RepositoryType>Git</RepositoryType>
-    <PackageTags>Data Paging Pagination Paged Result</PackageTags>
-    <Version>1.0.2</Version>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;netstandard1.6;Net6</TargetFrameworks>
+		<LangVersion>10.0</LangVersion>
+		<nullable>enable</nullable>
+		<AssemblyName>Olbrasoft.Data.Paging</AssemblyName>
+		<RootNamespace>Olbrasoft.Data.Paging</RootNamespace>
+		<Authors>Jiří Tůma</Authors>
+		<Company>Olbrasoft</Company>
+		<Description>Interfaces and classes for paged data</Description>
+		<Copyright>Copyright @2021 Olbrasoft</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Olbrasoft/Data</PackageProjectUrl>
+		<PackageIcon>olbrasoft-data-paging.png</PackageIcon>
+		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+		<RepositoryType>Git</RepositoryType>
+		<PackageTags>Data Paging Pagination Paged Result</PackageTags>
+		<Version>1.0.4</Version>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\olbrasoft-data-paging.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<Using Include="System"/>
+		<Using Include="System.Collections.Generic"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\olbrasoft-data-paging.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
+
 </Project>

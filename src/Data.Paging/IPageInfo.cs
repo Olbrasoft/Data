@@ -1,8 +1,7 @@
-﻿namespace Olbrasoft.Data.Paging
+﻿namespace Olbrasoft.Data.Paging;
+
+public interface IPageInfo
 {
-    public interface IPageInfo
-    {
-        int NumberOfSelectedPage { get; }
-        int PageSize { get; }
-    }
+    int NumberOfSelectedPage { get; }
+    int PageSize { get; }
 }
