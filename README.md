@@ -11,7 +11,7 @@
 ### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs/) Olbrasoft.Data.Cqrs  
 
 ## <img align="left" alt="Olbrasoft.Data.Sorting" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-cqrs-entityFrameworkCore.png" width="45" height="45"/> Data.Cqrs.EntityFrameworkCore
-[![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCorec/) Olbrasoft.Data.Cqrs.EntityFrameworkCore 
+### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCorec/) Olbrasoft.Data.Cqrs.EntityFrameworkCore 
 
 
 ## Data.Sorting.Extensions
