@@ -16,11 +16,10 @@
 ## <img align="left" alt="Olbrasoft.Data.Sorting" style="float: left;  display: block; margin: 0px, 0px, 0px, 20px; Padding:0px,0px,0px,0px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-cqrs-entityFrameworkCore.png" width="45" height="45"/> Data.Cqrs.EntityFrameworkCore
 ### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Cqrs.EntityFrameworkCore.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Cqrs.EntityFrameworkCorec/) Olbrasoft.Data.Cqrs.EntityFrameworkCore 
  
- ## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;  display: block; margin: 0px 0px 20px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-x-pagedList.png" width="45" height="45"/> Paging.X.PagedList
- ### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.X.PagedList.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging.X.PagedList/)  Olbrasoft.Data.Paging.X.PagedList
+## <img align="left" alt="Olbrasoft.Data.Paging" style="float: left;  display: block; margin: 0px 0px 20px;" src="https://raw.githubusercontent.com/Olbrasoft/Data/master/olbrasoft-data-x-pagedList.png" width="45" height="45"/> Paging.X.PagedList
+### [![NuGet](https://img.shields.io/nuget/vpre/Olbrasoft.Data.Paging.X.PagedList.svg)](https://www.nuget.org/packages/Olbrasoft.Data.Paging.X.PagedList/)  Olbrasoft.Data.Paging.X.PagedList
 
-
-  ## Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc
+## Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc
 
 Olbrasoft.Data.Paging.X.PagedList.AspNetCore.Mvc
 
