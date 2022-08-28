@@ -1,18 +1,13 @@
-﻿using Olbrasoft.Dispatching;
-using System.Threading;
-using System.Threading.Tasks;
+﻿namespace Olbrasoft.Data.Cqrs;
 
-namespace Olbrasoft.Data.Cqrs
+internal class AwesomeBooleanQueryHandler : QueryHandler<IRequest<bool>>
 {
-    internal class AwesomeBooleanQueryHandler : QueryHandler<IRequest<bool>>
+    public AwesomeBooleanQueryHandler()
     {
-        public AwesomeBooleanQueryHandler()
-        {
-        }
+    }
 
-        public override Task<bool> HandleAsync(IRequest<bool> query, CancellationToken token)
-        {
-            throw new System.NotImplementedException();
-        }
+    public override Task<bool> HandleAsync(IRequest<bool> query, CancellationToken token = default)
+    {
+        throw new System.NotImplementedException();
     }
 }

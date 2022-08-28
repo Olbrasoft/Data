@@ -1,21 +1,17 @@
-﻿using Olbrasoft.Dispatching;
-using Xunit;
+﻿namespace Olbrasoft.Data.Cqrs.Queries;
 
-namespace Olbrasoft.Data.Cqrs.Queries
+public class PagedQueryTest : BaseTest
 {
-    public class PagedQueryTest : BaseTest
+    [Fact]
+    public void Inherit_From_Request()
     {
-        [Fact]
-        public void Inherit_From_Request()
-        {
-            //Arrange
-            var type = typeof(Request<object>);
+        //Arrange
+        var type = typeof(Request<object>);
 
-            //Act
-            var query = new PagedQuery<object>(DispatcherMock.Object);
+        //Act
+        var query = new PagedQuery<object>(DispatcherMock.Object);
 
-            //Assert
-            Assert.IsAssignableFrom(type, query);
-        }
+        //Assert
+        Assert.IsAssignableFrom(type, query);
     }
 }

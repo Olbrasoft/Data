@@ -70,5 +70,6 @@ namespace Olbrasoft.Data.Paging
             //Assert
             Assert.True(result.TotalCount == 3 && result.FilteredCount == 5);
         }
+
     }
 }

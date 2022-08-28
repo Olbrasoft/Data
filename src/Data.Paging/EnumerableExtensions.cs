@@ -29,4 +29,5 @@ public static class EnumerableExtensions
     {
         return new PagedResult<T>(items) { TotalCount = totalCount, FilteredCount = filteredCount };
     }
+
 }

@@ -1,140 +1,159 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Moq;
-using Olbrasoft.Dispatching;
-using Olbrasoft.Mapping;
-using System.Linq;
-using Xunit;
+﻿namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
 
-namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore
+public class DbQueryHandlerTest
 {
-    public class DbQueryHandlerTest
+    [Fact]
+    public void DbQueryHandler_Is_Abstract()
     {
-        [Fact]
-        public void DbQueryHandler_Is_Abstract()
-        {
-            //Arrange
-            var type = typeof(DbQueryHandler<,,,>);
+        //Arrange
+        var type = typeof(DbQueryHandler<,,,>);
 
-            //Act
-            var result = type.IsAbstract;
+        //Act
+        var result = type.IsAbstract;
 
-            //Assert
-            Assert.True(result);
-        }
+        //Assert
+        Assert.True(result);
+    }
 
-        [Fact]
-        public void AwesomeQueryHandler_Inherit_From_DbQueryHandler_Of_Request_Of_Object_Comma_Object_AwesomeEntity()
-        {
-            //Arrange
-            var type = typeof(DbQueryHandler<Request<object>, object, DbContext, AwesomeEntity>);
+    [Fact]
+    public void AwesomeQueryHandler_Inherit_From_DbQueryHandler_Of_Request_Of_Object_Comma_Object_AwesomeEntity()
+    {
+        //Arrange
+        var type = typeof(DbQueryHandler<Request<object>, object, DbContext, AwesomeEntity>);
 
-            //Act
-            var handler = CreateAwesomeQueryHandler();
+        //Act
+        var handler = CreateAwesomeQueryHandler();
 
-            //Assert
-            Assert.IsAssignableFrom(type, handler);
-        }
+        //Assert
+        Assert.IsAssignableFrom(type, handler);
+    }
 
-        [Fact]
-        public void AwesomeDbQueryHandler_Of_AwesomeEntity_Comma_Request_Of_Object_Comma_Object_Inherit_From_QueryHandler_Of_Request_Of_Object_comma_Object()
-        {
-            //Arrange
-            var type = typeof(QueryHandler<Request<object>, object>);
+    [Fact]
+    public void AwesomeDbQueryHandler_Of_AwesomeEntity_Comma_Request_Of_Object_Comma_Object_Inherit_From_QueryHandler_Of_Request_Of_Object_comma_Object()
+    {
+        //Arrange
+        var type = typeof(QueryHandler<Request<object>, object>);
 
-            //Act
-            var handler = CreateAwesomeQueryHandler();
+        //Act
+        var handler = CreateAwesomeQueryHandler();
 
-            //Assert
-            Assert.IsAssignableFrom(type, handler);
-        }
+        //Assert
+        Assert.IsAssignableFrom(type, handler);
+    }
 
-        [Fact]
-        public void AwesomeQueryHandler_Property_Context_Return_Base_Protected_Property_Context_Type_Of_DbContext()
-        {
-            //Arrange
-            var handler = CreateAwesomeQueryHandler();
+    [Fact]
+    public void AwesomeQueryHandler_Property_Context_Return_Base_Protected_Property_Context_Type_Of_DbContext()
+    {
+        //Arrange
+        var handler = CreateAwesomeQueryHandler();
 
-            //Act
-            var result = handler.Context;
+        //Act
+        var result = handler.Context;
 
-            //Assert
-            Assert.IsAssignableFrom<DbContext>(result);
-        }
+        //Assert
+        Assert.IsAssignableFrom<DbContext>(result);
+    }
 
-        [Fact]
-        public void AwesomeQueryHandler_Property_Entities_Return_Base_Protected_Property_Type_Of_IQueryable_Of_AwesomeEntity()
-        {
-            //Arrange
-            var handler = CreateAwesomeQueryHandler();
+    [Fact]
+    public void AwesomeQueryHandler_Property_Entities_Return_Base_Protected_Property_Type_Of_IQueryable_Of_AwesomeEntity()
+    {
+        //Arrange
+        var handler = CreateAwesomeQueryHandler();
 
-            //Act
-            var result = handler.Entities;
+        //Act
+        var result = handler.Entities;
 
-            //Assert
-            Assert.IsAssignableFrom<IQueryable<AwesomeEntity>>(result);
-        }
+        //Assert
+        Assert.IsAssignableFrom<IQueryable<AwesomeEntity>>(result);
+    }
 
-        [Fact]
-        public void AwesomeBooleanQueryHandler_Inherit_From_DbQueryHandler_Of_IRequest_Of_Bool_Comma_DbContext_Comma_AwesomeEntity()
-        {
-            //Arrange
-            var type = typeof(DbQueryHandler<IRequest<bool>, DbContext, AwesomeEntity>);
+    [Fact]
+    public void AwesomeBooleanQueryHandler_Inherit_From_DbQueryHandler_Of_IRequest_Of_Bool_Comma_DbContext_Comma_AwesomeEntity()
+    {
+        //Arrange
+        var type = typeof(DbQueryHandler<IRequest<bool>, DbContext, AwesomeEntity>);
 
-            var handler = CreateAwesomeBooleanQueryHandler();
+        var handler = CreateAwesomeBooleanQueryHandler();
 
-            //Assert
-            Assert.IsAssignableFrom(type, handler);
-        }
+        //Assert
+        Assert.IsAssignableFrom(type, handler);
+    }
 
-        [Fact]
-        public void AwesomeBooleanQueryHandler_GetProtectedPropertyContext_Return_Context()
-        {
-            //Arrange
-            var handler = CreateAwesomeBooleanQueryHandler();
+    [Fact]
+    public void AwesomeBooleanQueryHandler_GetProtectedPropertyContext_Return_Context()
+    {
+        //Arrange
+        var handler = CreateAwesomeBooleanQueryHandler();
 
-            //Act
-            var result = handler.GetProtectedPropertyContext();
+        //Act
+        var result = handler.GetProtectedPropertyContext();
 
-            //Assert
-            Assert.IsAssignableFrom<DbContext>(result);
-        }
+        //Assert
+        Assert.IsAssignableFrom<DbContext>(result);
+    }
 
-        [Fact]
-        public void AwesomeBooleanQueryHandler_GetProtectedProperyEntities_Return_Protected_Property_Type_Of_IQueryable_Of_AwesomeEntity()
-        {
-            var handler = CreateAwesomeBooleanQueryHandler();
+    [Fact]
+    public void AwesomeBooleanQueryHandler_GetProtectedProperyEntities_Return_Protected_Property_Type_Of_IQueryable_Of_AwesomeEntity()
+    {
+        var handler = CreateAwesomeBooleanQueryHandler();
 
-            //Act
-            var result = handler.GetProtectedProperyEntities();
+        //Act
+        var result = handler.GetProtectedProperyEntities();
 
-            //Assert
-            Assert.IsAssignableFrom<IQueryable<AwesomeEntity>>(result);
-        }
+        //Assert
+        Assert.IsAssignableFrom<IQueryable<AwesomeEntity>>(result);
+    }
 
-        private static AwesomeBooleanQueryHandler CreateAwesomeBooleanQueryHandler()
-        {
-            var handler = new AwesomeBooleanQueryHandler(CreateFakeFactory());
-            return handler;
-        }
+    private static AwesomeBooleanQueryHandler CreateAwesomeBooleanQueryHandler()
+    {
+        var handler = new AwesomeBooleanQueryHandler(CreateFakeContext());
+        return handler;
+    }
 
-        private static AwesomeQueryHandler CreateAwesomeQueryHandler()
-        {
-            var projectorMock = new Mock<IProjector>();
+    private static AwesomeQueryHandler CreateAwesomeQueryHandler()
+    {
+        var projectorMock = new Mock<IProjector>();
 
-            return new AwesomeQueryHandler(projectorMock.Object, CreateFakeFactory());
-        }
+        return new AwesomeQueryHandler(projectorMock.Object, CreateFakeContext());
+    }
 
-        private static IDbContextFactory<DbContext> CreateFakeFactory()
-        {
-            var factoryMock = new Mock<IDbContextFactory<DbContext>>();
-            var contextMock = new Mock<DbContext>();
-            var setMock = new Mock<DbSet<AwesomeEntity>>();
+    private static DbContext CreateFakeContext()
+    {
 
-            contextMock.Setup(p => p.Set<AwesomeEntity>()).Returns(setMock.Object);
+        var contextMock = new Mock<DbContext>();
+        var setMock = new Mock<DbSet<AwesomeEntity>>();
 
-            factoryMock.Setup(p => p.CreateDbContext()).Returns(contextMock.Object);
+        contextMock.Setup(p => p.Set<AwesomeEntity>()).Returns(setMock.Object);
 
-            return factoryMock.Object;
-        }
+
+
+        return contextMock.Object;
+    }
+
+    [Fact]
+    public void DbQueryHandler_Throw_ArgumentNullException_When_Context_Is_Null()
+    {
+        //Arrange
+        var projectorMock = new Mock<IProjector>();
+
+        //Act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+        var ex = Assert.Throws<ArgumentNullException>((() => new AwesomeQueryHandler(projectorMock.Object, null)));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
+        //Assert
+        Assert.True(ex.Message is "Value cannot be null. (Parameter 'context')");
+    }
+
+    [Fact]
+    public void BooleanDbQueryHandler_Throw_ArgumentNullException_When_Context_Is_Null()
+    {
+        //Act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+        var ex = Assert.Throws<ArgumentNullException>(() => new AwesomeBooleanQueryHandler(null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
+        //Assert
+        Assert.True(ex.Message is "Value cannot be null. (Parameter 'context')");
     }
 }
