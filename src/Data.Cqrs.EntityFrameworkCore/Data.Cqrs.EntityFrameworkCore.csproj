@@ -1,28 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <TargetFrameworks>Net6</TargetFrameworks>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-	  <Authors>Jiří Tůma</Authors>
-	  <Company>Olbrasoft</Company>
-	  <Description>CQS and CQRS for EntityFrameworkCore</Description>
-	  <Copyright>Copyright @2022 Olbrasoft</Copyright>
-	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageIcon>olbrasoft-data-cqrs-entityFrameworkCore.png</PackageIcon>
-	  <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
-	  <RepositoryType>git</RepositoryType>
-	  <PackageTags>CQS CQRS EntityFrameworkCore</PackageTags>
-	  <Version>1.6.0</Version>
-	  
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>Net6</TargetFrameworks>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<Authors>Jiří Tůma</Authors>
+		<Company>Olbrasoft</Company>
+		<Description>CQS and CQRS for EntityFrameworkCore</Description>
+		<Copyright>Copyright @2022 Olbrasoft</Copyright>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageIcon>olbrasoft-data-cqrs-entityFrameworkCore.png</PackageIcon>
+		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>CQS CQRS EntityFrameworkCore</PackageTags>
+		<Version>1.6.0</Version>
+		<RootNamespace>Olbrasoft.Data.Cqrs.EntityFrameworkCore</RootNamespace>
+		<AssemblyName>Olbrasoft.Data.Cqrs.EntityFrameworkCore</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <None Include="..\..\olbrasoft-data-cqrs-entityFrameworkCore.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\..\olbrasoft-data-cqrs-entityFrameworkCore.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Olbrasoft.Data.Cqrs" Version="1.6.0" />
@@ -34,11 +35,11 @@
 		<Using Include="Olbrasoft.Dispatching" />
 		<Using Include="Olbrasoft.Mapping" />
 	</ItemGroup>
-	
+
 	<ItemGroup Condition="'$(TargetFramework)' == 'Net6'">
-	  <PackageReference Include="Microsoft.EntityFrameworkCore">
-	    <Version>6.0.8</Version>
-	  </PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore">
+			<Version>6.0.8</Version>
+		</PackageReference>
 	</ItemGroup>
 
 </Project>
