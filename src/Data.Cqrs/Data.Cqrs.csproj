@@ -3,33 +3,38 @@
   <PropertyGroup>
 	  <TargetFrameworks>netstandard2.1;Net6</TargetFrameworks>
 	  <LangVersion>10.0</LangVersion>
+	  <Nullable>enable</Nullable>
 	  <AssemblyName>Olbrasoft.Data.Cqrs</AssemblyName>
 	  <RootNamespace>Olbrasoft.Data.Cqrs</RootNamespace>
 	  <Authors>Jiří Tůma</Authors>
 	  <Company>Olbrasoft</Company>
-	  <Description>Extensions project Dispatching to CQRS. Distribution RequestHandler to CommandHandler with mapper and QueryHandler with projector.</Description>
+	  <Description>Extensions project Dispatching to CQRS. </Description>
 	  <Copyright>Copyright @2020 Olbrasoft</Copyright>
 	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
 	  <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 	  <PackageIcon>olbrasoft-data-cqrs.png</PackageIcon>
 	  <RepositoryType>git</RepositoryType>
 	  <PackageTags>Command, Query, CommandHandler, QueryHandler, CQRS</PackageTags>
-	  <Version>1.6.0</Version>
+	  <Version>1.6.8</Version>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <IncludeSymbols>True</IncludeSymbols>
+	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Olbrasoft.Data.Paging" Version="1.0.4" />
 		<PackageReference Include="Olbrasoft.Data.Sorting" Version="1.0.6" />
-		<PackageReference Include="Olbrasoft.Dispatching.Abstractions" Version="1.4.0" />
-		<PackageReference Include="Olbrasoft.Mapping" Version="1.0.2" />
+		<PackageReference Include="Olbrasoft.Dispatching.Abstractions" Version="1.6.7" />
 	</ItemGroup>
-
+	
 	<ItemGroup>
-		<Using Include="Olbrasoft.Dispatching"/>
-		<Using Include="Olbrasoft.Mapping"/>
-		<Using Include="System"/>
-		<Using Include="System.Threading"/>
-		<Using Include="System.Threading.Tasks"/>
+		<Using Include="Olbrasoft.Dispatching" />
+		<Using Include="System" />
+		<Using Include="System.Threading" />
+		<Using Include="System.Threading.Tasks" />
+		<Using Include="Olbrasoft.Dispatching.Abstractions" />
+		<Using Include="Olbrasoft.Data.Cqrs.Exceptions"/>
+		<Using Include="Olbrasoft.Dispatching.Abstractions.Exceptions"/>
 	</ItemGroup>
 
 	<ItemGroup>

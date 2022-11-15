@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net5.0;Net6</TargetFrameworks>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<LangVersion>10</LangVersion>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Olbrasoft.Data.Common</RootNamespace>
+		<PackageId>Olbrasoft.$(AssemblyName)</PackageId>
+		<Title>Provides the base abstract classes, including Olbrasoft.Data.DbConnectionFactory for all data providers.</Title>
+		<Authors>Jiří Tůma</Authors>
+		<Company>Olbrasoft</Company>
+		<Product>Olbrasoft.Data.Common library</Product>
+		<Description>Provides the base abstract classes, including Olbrasoft.Data.DbConnectionFactory for all data providers. </Description>
+		<Copyright>Copyright @2022 Olbrasoft</Copyright>
+		<PackageIcon>olbrasoft-data-common.png</PackageIcon>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+		<PackageTags>Data, Abstractions, Abstract, DbConnectionFactory</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\olbrasoft-data-common.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+</Project>

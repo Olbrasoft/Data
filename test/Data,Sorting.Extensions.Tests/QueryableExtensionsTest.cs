@@ -1,12 +1,11 @@
-﻿using Data.Sorting.Tests;
-using Olbrasoft.Data;
+﻿using Olbrasoft.Data;
 using Olbrasoft.Data.Sorting;
 using Olbrasoft.Extensions.Linq;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
-namespace Data_Sorting.Extensions.Tests
+namespace Data.Sorting.Extensions.Tests
 {
     public class QueryableExtensionsTest
     {

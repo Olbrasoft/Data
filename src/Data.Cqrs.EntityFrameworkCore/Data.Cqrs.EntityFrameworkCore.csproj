@@ -13,9 +13,13 @@
 		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>CQS CQRS EntityFrameworkCore</PackageTags>
-		<Version>1.6.0</Version>
+		<Version>1.6.3</Version>
 		<RootNamespace>Olbrasoft.Data.Cqrs.EntityFrameworkCore</RootNamespace>
 		<AssemblyName>Olbrasoft.Data.Cqrs.EntityFrameworkCore</AssemblyName>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -26,19 +30,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Olbrasoft.Data.Cqrs" Version="1.6.0" />
+	  <PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Data.Cqrs\Data.Cqrs.csproj" />
 	</ItemGroup>
 
 
 	<ItemGroup>
 		<Using Include="Microsoft.EntityFrameworkCore" />
 		<Using Include="Olbrasoft.Dispatching" />
-		<Using Include="Olbrasoft.Mapping" />
+		<Using Include="Olbrasoft.Mapping"/>
+		<Using Include="Olbrasoft.Dispatching.Abstractions" />
+		<Using Include="System.Linq.Expressions"/>
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'Net6'">
 		<PackageReference Include="Microsoft.EntityFrameworkCore">
-			<Version>6.0.8</Version>
+			<Version>7.0.0</Version>
 		</PackageReference>
 	</ItemGroup>
 

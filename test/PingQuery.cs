@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Data.Sorting.Extensions.Tests
+namespace test.test
 {
-    public class AwesomeDto
+    public class PingQuery
     {
-        public string Text { get; set; }
+        
     }
 }

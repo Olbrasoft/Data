@@ -5,6 +5,7 @@ VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{4C5BE07A-3A63-47E2-9BDC-1BEF97C26458}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -20,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Sorting", "src\Data.So
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Sorting.Extensions", "src\Data.Sorting.Extensions\Data.Sorting.Extensions.csproj", "{D5D5EB2B-D0FC-4F36-A4A6-62A71100E696}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data,Sorting.Extensions.Tests", "test\Data,Sorting.Extensions.Tests\Data,Sorting.Extensions.Tests.csproj", "{5F092E06-8D7F-44EB-9214-182F75CC8115}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Sorting.Extensions.Tests", "test\Data,Sorting.Extensions.Tests\Data.Sorting.Extensions.Tests.csproj", "{5F092E06-8D7F-44EB-9214-182F75CC8115}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Paging.X.PagedList", "src\Data.Paging.X.PagedList\Data.Paging.X.PagedList.csproj", "{301302DD-7C70-421B-B2C7-DD010B2B8641}"
 EndProject
@@ -30,13 +31,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Paging.X.PagedList.Asp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Paging.X.PagedList.AspNetCore.Mvc.Example", "src\Data.Paging.X.PagedList.AspNetCore.Mvc.Example\Data.Paging.X.PagedList.AspNetCore.Mvc.Example.csproj", "{C2DCAD80-2EDB-4373-90BA-01AA1A28073C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Cqrs", "src\Data.Cqrs\Data.Cqrs.csproj", "{F885A55C-BE75-491A-8247-AAA02630C5F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs", "src\Data.Cqrs\Data.Cqrs.csproj", "{F885A55C-BE75-491A-8247-AAA02630C5F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Cqrs.Tests", "test\Data.Cqrs.Tests\Data.Cqrs.Tests.csproj", "{68759E52-F383-4A68-9ADC-2D4FCE3006C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.Tests", "test\Data.Cqrs.Tests\Data.Cqrs.Tests.csproj", "{68759E52-F383-4A68-9ADC-2D4FCE3006C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.EntityFrameworkCore", "src\Data.Cqrs.EntityFrameworkCore\Data.Cqrs.EntityFrameworkCore.csproj", "{8A0CC228-0815-4E37-A3FF-7A97CA6A1383}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data.Cqrs.EntityFrameworkCore.Tests", "test\Data.Cqrs.EntityFrameworkCore.Tests\Data.Cqrs.EntityFrameworkCore.Tests.csproj", "{B8D08AA2-955C-45CF-9CBE-D371BC139000}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.EntityFrameworkCore.Tests", "test\Data.Cqrs.EntityFrameworkCore.Tests\Data.Cqrs.EntityFrameworkCore.Tests.csproj", "{B8D08AA2-955C-45CF-9CBE-D371BC139000}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Common", "src\Data.Common\Data.Common.csproj", "{863B4C62-182C-4B70-9FC6-94164E026386}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.SqlClient.Tests", "src\Data.SqlClient.Tests\Data.SqlClient.Tests.csproj", "{4B871A76-6437-4DE9-8AEF-5B903EF1C40D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.SqlClient", "src\Data.SqlClient\Data.SqlClient.csproj", "{569A917A-8952-4DC5-BFA4-57AB66181A8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Common.Tests", "test\Data.Common.Tests\Data.Common.Tests.csproj", "{F836EAD4-9282-436D-8C2B-DB23CEB73576}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +109,22 @@ Global
 		{B8D08AA2-955C-45CF-9CBE-D371BC139000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8D08AA2-955C-45CF-9CBE-D371BC139000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8D08AA2-955C-45CF-9CBE-D371BC139000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{863B4C62-182C-4B70-9FC6-94164E026386}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{863B4C62-182C-4B70-9FC6-94164E026386}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{863B4C62-182C-4B70-9FC6-94164E026386}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{863B4C62-182C-4B70-9FC6-94164E026386}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B871A76-6437-4DE9-8AEF-5B903EF1C40D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B871A76-6437-4DE9-8AEF-5B903EF1C40D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B871A76-6437-4DE9-8AEF-5B903EF1C40D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B871A76-6437-4DE9-8AEF-5B903EF1C40D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{569A917A-8952-4DC5-BFA4-57AB66181A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{569A917A-8952-4DC5-BFA4-57AB66181A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{569A917A-8952-4DC5-BFA4-57AB66181A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{569A917A-8952-4DC5-BFA4-57AB66181A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F836EAD4-9282-436D-8C2B-DB23CEB73576}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F836EAD4-9282-436D-8C2B-DB23CEB73576}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F836EAD4-9282-436D-8C2B-DB23CEB73576}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F836EAD4-9282-436D-8C2B-DB23CEB73576}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -111,6 +136,8 @@ Global
 		{54A709AF-5C1C-4262-A3BE-A4A88BB8903F} = {11DA4622-F9B5-4DF1-A09A-AA9562E0666C}
 		{68759E52-F383-4A68-9ADC-2D4FCE3006C7} = {11DA4622-F9B5-4DF1-A09A-AA9562E0666C}
 		{B8D08AA2-955C-45CF-9CBE-D371BC139000} = {11DA4622-F9B5-4DF1-A09A-AA9562E0666C}
+		{4B871A76-6437-4DE9-8AEF-5B903EF1C40D} = {11DA4622-F9B5-4DF1-A09A-AA9562E0666C}
+		{F836EAD4-9282-436D-8C2B-DB23CEB73576} = {11DA4622-F9B5-4DF1-A09A-AA9562E0666C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {167E4CD5-C917-4A5C-B5E5-162A7990EEA4}
