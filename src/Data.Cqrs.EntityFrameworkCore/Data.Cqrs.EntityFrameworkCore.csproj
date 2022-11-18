@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>Net6</TargetFrameworks>
+		<TargetFrameworks>net6.0</TargetFrameworks>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Jiří Tůma</Authors>
@@ -30,20 +30,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
 	  <PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Data.Cqrs\Data.Cqrs.csproj" />
+		<PackageReference Include="Olbrasoft.Data.Cqrs" Version="1.6.8" />
 	</ItemGroup>
 
 
 	<ItemGroup>
 		<Using Include="Microsoft.EntityFrameworkCore" />
 		<Using Include="Olbrasoft.Dispatching" />
-		<Using Include="Olbrasoft.Mapping"/>
+		<Using Include="Olbrasoft.Mapping" />
 		<Using Include="Olbrasoft.Dispatching.Abstractions" />
-		<Using Include="System.Linq.Expressions"/>
+		<Using Include="System.Linq.Expressions" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'Net6'">

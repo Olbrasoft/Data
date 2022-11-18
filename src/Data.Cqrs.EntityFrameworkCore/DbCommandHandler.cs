@@ -172,8 +172,6 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     }
       
 
-    
-
     /// <summary>
     /// Execute a mapping from the command to a new entity.
     /// The source type is inferred from the source object.
@@ -196,7 +194,11 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
         return entity;
     }
 
-   
+    protected TDestination MapTo<TDestination>(object source)
+    {
+        if (_mapper is null) throw new NullReferenceException(nameof(_mapper));
+        return _mapper.MapTo<TDestination>(source);
+    }
 
 }
 

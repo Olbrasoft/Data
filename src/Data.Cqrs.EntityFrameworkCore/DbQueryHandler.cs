@@ -12,4 +12,11 @@ public abstract class DbQueryHandler<TContext, TEntity, TQuery, TResult> : DbReq
     {
     }
 
+    protected static void ThrowIfQueryIsNullOrCancellationRequested(TQuery query, CancellationToken token)
+    {
+        if (query is null) throw new ArgumentNullException(nameof(query));
+
+        token.ThrowIfCancellationRequested();
+    }
+
 }
