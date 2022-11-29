@@ -1,11 +1,10 @@
 ﻿using Olbrasoft.Data.Paging;
-using Olbrasoft.Data.Paging.X.PagedList;
+using Olbrasoft.Extensions.Paging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using X.PagedList;
 using Xunit;
-using Olbrasoft.Extensions.Paging;
 
 namespace Data.Paging.X.PagedList.Tests
 {

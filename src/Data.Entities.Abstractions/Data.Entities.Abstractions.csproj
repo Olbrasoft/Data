@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6</TargetFrameworks>
+		<LangVersion>10</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+		<RootNamespace>Olbrasoft.Data.Entities.Abstractions</RootNamespace>
+
+		<AssemblyName>Olbrasoft.$(MSBuildProjectName)</AssemblyName>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<PackageIcon>data-entities.png</PackageIcon>
+
+		<RepositoryUrl>https://github.com/Olbrasoft/Data.Entities</RepositoryUrl>
+
+		<Copyright>Copyright @2022 Olbrasoft</Copyright>
+
+		<Company>Olbrasoft</Company>
+
+		<Authors>Jiří Tůma</Authors>
+
+		<Description>Interfaces a base classes for entities</Description>
+
+		<PackageTags>Entities</PackageTags>
+
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\..\data-entities.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+</Project>
