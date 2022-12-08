@@ -1,0 +1,64 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6</TargetFrameworks>
+		<LangVersion>10</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+
+<<<<<<< HEAD
+		<RootNamespace>Olbrasoft.Data.Entities</RootNamespace>
+=======
+		<RootNamespace>Olbrasoft.Data.Entities.Abstractions</RootNamespace>
+>>>>>>> aa8b09ca7869a89cd3a323a811fafa00386a955a
+
+		<AssemblyName>Olbrasoft.$(MSBuildProjectName)</AssemblyName>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+<<<<<<< HEAD
+		<PackageIcon>olbrasoft-data-entities.png</PackageIcon>
+
+		<PackageVersion>1.0.1</PackageVersion>
+=======
+		<PackageIcon>data-entities.png</PackageIcon>
+
+>>>>>>> aa8b09ca7869a89cd3a323a811fafa00386a955a
+		<RepositoryUrl>https://github.com/Olbrasoft/Data.Entities</RepositoryUrl>
+
+		<Copyright>Copyright @2022 Olbrasoft</Copyright>
+
+		<Company>Olbrasoft</Company>
+
+		<Authors>Jiří Tůma</Authors>
+
+		<Description>Interfaces a base classes for entities</Description>
+
+		<PackageTags>Entities</PackageTags>
+
+		<RepositoryType>git</RepositoryType>
+	</PropertyGroup>
+
+	<ItemGroup>
+<<<<<<< HEAD
+		<None Include="..\..\olbrasoft-data-entities.png">
+=======
+		<None Include="..\..\data-entities.png">
+>>>>>>> aa8b09ca7869a89cd3a323a811fafa00386a955a
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+	</ItemGroup>
+
+<<<<<<< HEAD
+	<ItemGroup>
+		<Using Include="System.ComponentModel.DataAnnotations"/>
+	</ItemGroup>
+	
+=======
+>>>>>>> aa8b09ca7869a89cd3a323a811fafa00386a955a
+</Project>

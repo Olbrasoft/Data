@@ -1,32 +1,36 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6</TargetFrameworks>
-		<LangVersion>10</LangVersion>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6;Net7</TargetFrameworks>
+		<LangVersion>11</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-
 		<RootNamespace>Olbrasoft.Data.Entities.Abstractions</RootNamespace>
-
-		<AssemblyName>Olbrasoft.$(MSBuildProjectName)</AssemblyName>
+		<AssemblyName>Olbrasoft.Data.Entities.Abstractions</AssemblyName>
 
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 
 		<PackageIcon>data-entities.png</PackageIcon>
 
-		<RepositoryUrl>https://github.com/Olbrasoft/Data.Entities</RepositoryUrl>
+		<Version>1.7.0</Version>
+		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 
 		<Copyright>Copyright @2022 Olbrasoft</Copyright>
 
 		<Company>Olbrasoft</Company>
 
-		<Authors>Jiří Tůma</Authors>
-
-		<Description>Interfaces a base classes for entities</Description>
+     	<Authors>Jiří Tůma</Authors>
 
 		<PackageTags>Entities</PackageTags>
 
 		<RepositoryType>git</RepositoryType>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<Description>Interfgaces and abstract classes </Description>
+
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -35,9 +39,8 @@
 			<PackagePath>\</PackagePath>
 		</None>
 	</ItemGroup>
-
 	<ItemGroup>
-	  <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 	</ItemGroup>
 
 </Project>

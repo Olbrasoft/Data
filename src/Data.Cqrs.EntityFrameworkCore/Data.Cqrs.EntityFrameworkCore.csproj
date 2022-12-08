@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net6.0</TargetFrameworks>
+		<TargetFrameworks>net6.0;Net7</TargetFrameworks>
+		<LangVersion>11</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Jiří Tůma</Authors>
@@ -13,7 +14,7 @@
 		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>CQS CQRS EntityFrameworkCore</PackageTags>
-		<Version>1.6.4</Version>
+		<Version>1.7.0</Version>
 		<RootNamespace>Olbrasoft.Data.Cqrs.EntityFrameworkCore</RootNamespace>
 		<AssemblyName>Olbrasoft.Data.Cqrs.EntityFrameworkCore</AssemblyName>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>

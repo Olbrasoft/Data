@@ -3,7 +3,6 @@
 public abstract class DbQueryHandler<TContext, TEntity, TQuery, TResult> : DbRequestHandler<TContext, TEntity, TQuery, TResult>
     where TContext : DbContext where TEntity : class where TQuery : BaseQuery<TResult>
 {
-
     protected DbQueryHandler(TContext context) : base(context)
     {
     }
@@ -18,5 +17,4 @@ public abstract class DbQueryHandler<TContext, TEntity, TQuery, TResult> : DbReq
 
         token.ThrowIfCancellationRequested();
     }
-
 }

@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net6.0;Net7</TargetFrameworks>
+	  <LangVersion>11</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	  <Authors>Jiří Tůma</Authors>
@@ -12,7 +13,7 @@
 	  <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 	  <RepositoryType>git</RepositoryType>
 	  <PackageTags>CQS CQRS FreeSql</PackageTags>
-	  <Version>1.6.4</Version>
+	  <Version>1.7.0</Version>
 	  <RootNamespace>Olbrasoft.Data.Cqrs.FreeSql</RootNamespace>
 	  <AssemblyName>Olbrasoft.Data.Cqrs.FreeSql</AssemblyName>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -29,9 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="FreeSql.DbContext" Version="3.2.682" />
+    <PackageReference Include="FreeSql.DbContext" Version="3.2.684" />
     <PackageReference Include="Olbrasoft.Data.Cqrs" Version="1.6.8" />
-    <PackageReference Include="Olbrasoft.Extensions" Version="1.0.6" />
+    <PackageReference Include="Olbrasoft.Extensions" Version="1.0.7" />
     <PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
   </ItemGroup>
 

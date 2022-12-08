@@ -1,4 +1,4 @@
-﻿namespace Olbrasoft.Data.Entities.Abstractions;
+namespace Olbrasoft.Data.Entities.Abstractions;
 
 public interface IHaveCreated
 {

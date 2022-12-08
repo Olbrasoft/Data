@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6;Net7</TargetFrameworks>
+		<LangVersion>10</LangVersion>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Olbrasoft.$(MSBuildProjectName)</AssemblyName>
+		<RootNamespace>Olbrasoft.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<PackageIcon>olbrasoft-data-entities-identity.png</PackageIcon>
+
+		<Version>1.7.0</Version>
+		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+
+		<Copyright>Copyright @2022 Olbrasoft</Copyright>
+
+		<Company>Olbrasoft</Company>
+
+		<Authors>Jiří Tůma</Authors>
+
+		<Description>classes for Identity Inherits from Microsoft.AspNeCore.Identity.Store</Description>
+
+		<PackageTags>Entities</PackageTags>
+
+		<RepositoryType>git</RepositoryType>
+		
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Include="..\..\olbrasoft-data-entities-identity.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Data.Entities.Abstractions\Data.Entities.Abstractions.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Microsoft.AspNetCore.Identity" />
+		<Using Include="Olbrasoft.Data.Entities.Abstractions" />
+	</ItemGroup>
+
+</Project>
