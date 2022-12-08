@@ -16,6 +16,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Data Sorting</PackageTags>
     <Version>1.7.0</Version>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>

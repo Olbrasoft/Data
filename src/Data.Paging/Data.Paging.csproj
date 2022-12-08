@@ -17,11 +17,14 @@
 		<RepositoryType>Git</RepositoryType>
 		<PackageTags>Data Paging Pagination Paged Result</PackageTags>
 		<Version>1.7.0</Version>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<IncludeSymbols>True</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Using Include="System"/>
-		<Using Include="System.Collections.Generic"/>
+		<Using Include="System" />
+		<Using Include="System.Collections.Generic" />
 	</ItemGroup>
 
 	<ItemGroup>

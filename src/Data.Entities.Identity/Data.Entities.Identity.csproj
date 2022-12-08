@@ -26,6 +26,12 @@
 		<PackageTags>Entities</PackageTags>
 
 		<RepositoryType>git</RepositoryType>
+
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+
+		<IncludeSymbols>True</IncludeSymbols>
+
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		
 	</PropertyGroup>
 
