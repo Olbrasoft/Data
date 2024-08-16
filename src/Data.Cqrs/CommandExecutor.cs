@@ -8,7 +8,7 @@ public class CommandExecutor : ICommandExecutor
 
     public CommandExecutor(IDispatcher dispatcher)
     {
-        if (dispatcher is null) throw new DispatcherNullException();
+        if (dispatcher is null) throw new ArgumentNullException(nameof(dispatcher));
 
         _dispatcher = dispatcher;
     }
@@ -25,6 +25,9 @@ public class CommandExecutor : ICommandExecutor
 
         return result;
     }
+
+
+
 
     private void OnExecuting<TResult>(BaseCommand<TResult> command)
     {

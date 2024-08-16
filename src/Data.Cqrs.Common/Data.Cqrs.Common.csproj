@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+	  <TargetFrameworks>Net6;Net7;Net8</TargetFrameworks>
+	  <LangVersion>12.0</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Olbrasoft.Data.Cqrs</RootNamespace>
+    <AssemblyName>Olbrasoft.$(MSBuildProjectName)</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mediation\src\Mediation\Mediation.csproj" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<Using Include="Olbrasoft.Mediation" />
+		<Using Include="Olbrasoft.Mediation.Abstractions" />
+	</ItemGroup>
+	
+</Project>

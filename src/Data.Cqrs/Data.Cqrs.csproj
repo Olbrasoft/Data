@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <TargetFrameworks>netstandard2.1;Net6;Net7</TargetFrameworks>
-	  <LangVersion>11.0</LangVersion>
+	  <TargetFrameworks>netstandard2.1;Net6;Net7;Net8</TargetFrameworks>
+	  <LangVersion>12.0</LangVersion>
 	  <Nullable>enable</Nullable>
 	  <AssemblyName>Olbrasoft.Data.Cqrs</AssemblyName>
 	  <RootNamespace>Olbrasoft.Data.Cqrs</RootNamespace>
@@ -22,7 +22,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Olbrasoft.Dispatching.Abstractions" Version="1.7.0" />
+		<PackageReference Include="Olbrasoft.Dispatching.Abstractions" Version="1.8.0" />
 	</ItemGroup>
 	
 	<ItemGroup>
@@ -30,9 +30,9 @@
 		<Using Include="System" />
 		<Using Include="System.Threading" />
 		<Using Include="System.Threading.Tasks" />
-		<Using Include="Olbrasoft.Dispatching.Abstractions" />
+		<!--<Using Include="Olbrasoft.Dispatching.Abstractions" />-->
 		<Using Include="Olbrasoft.Data.Cqrs.Exceptions" />
-		<Using Include="Olbrasoft.Dispatching.Abstractions.Exceptions" />
+		
 	</ItemGroup>
 
 	<ItemGroup>
@@ -40,5 +40,9 @@
 			<Pack>True</Pack>
 			<PackagePath></PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Data.Cqrs.Abstractions\Data.Cqrs.Abstractions.csproj" />
 	</ItemGroup>
 </Project>

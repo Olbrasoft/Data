@@ -8,7 +8,7 @@ public class QueryProcessor : IQueryProcessor
 
     public QueryProcessor(IDispatcher dispatcher)
     {
-        if (dispatcher is null) throw new DispatcherNullException();
+        if (dispatcher is null) throw new ArgumentNullException(nameof(dispatcher));
 
         _dispatcher = dispatcher;
     }
