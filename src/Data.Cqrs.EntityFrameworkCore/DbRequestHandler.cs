@@ -1,5 +1,6 @@
 ﻿using Olbrasoft.Mediation.Abstractions;
 
+
 namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
 
 /// <summary>

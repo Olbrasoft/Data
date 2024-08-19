@@ -32,7 +32,7 @@
 
   <ItemGroup>
     <Using Include="Xunit" />
-	  <Using Include="Moq"/>
+	  <Using Include="Moq" />
 	  <Using Include="FluentAssertions" />
 	  <Using Include="Olbrasoft.Data.Cqrs" />
 	  <Using Include="Olbrasoft.Mediation" />

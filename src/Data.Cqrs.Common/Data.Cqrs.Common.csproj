@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mediation\src\Mediation\Mediation.csproj" />
+    <PackageReference Include="Olbrasoft.Mediation" Version="1.0.2">
+	 
+	</PackageReference>
   </ItemGroup>
 
 	<ItemGroup>
-		<Using Include="Olbrasoft.Mediation" />
+		<Using Include="Olbrasoft.Mediation" />	
 		<Using Include="Olbrasoft.Mediation.Abstractions" />
 	</ItemGroup>
 	

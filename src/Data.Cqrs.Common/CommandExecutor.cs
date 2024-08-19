@@ -1,4 +1,6 @@
-﻿namespace Olbrasoft.Data.Cqrs;
+﻿
+
+namespace Olbrasoft.Data.Cqrs;
 
 /// <summary>
 /// Executes commands by sending them to the mediator.

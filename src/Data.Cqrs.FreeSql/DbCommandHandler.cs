@@ -1,6 +1,4 @@
-﻿using Olbrasoft.Mapping;
-
-namespace Olbrasoft.Data.Cqrs.FreeSql;
+﻿namespace Olbrasoft.Data.Cqrs.FreeSql;
 
 /// <summary>
 /// Represents a base class for database command handlers.
