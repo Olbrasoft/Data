@@ -26,4 +26,21 @@ public static class ServiceCollectionExtensions
 
     }
 
+    public static CqrsBuilder AddCqrs(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Transient, params Assembly[] assemblies)
+    {
+
+        if (assemblies != null && assemblies.Length != 0)
+        {
+            services.AddMediation(assemblies).UseDynamicMediator(lifetime);
+
+            services.TryAdd(new ServiceDescriptor(typeof(ICommandExecutor), typeof(CommandExecutor), lifetime));
+            services.TryAdd(new ServiceDescriptor(typeof(IQueryProcessor), typeof(QueryProcessor), lifetime));
+
+            return new CqrsBuilder(services);
+
+        }
+
+        throw new ArgumentNullException(nameof(assemblies));
+
+    }
 }

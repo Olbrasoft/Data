@@ -47,6 +47,19 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     /// <returns>A task representing the asynchronous operation. The task result is true if the entity was saved successfully, otherwise false.</returns>
     protected virtual async Task<bool> SaveOneEntityAsync(CancellationToken token) => await Context.SaveChangesAsync(token) == 1;
 
+
+    protected virtual Task<int> SaveAsync(TEntity entity, CancellationToken token)
+    {
+        Entities.Add(entity);
+        return Context.SaveChangesAsync(token);
+    }
+
+    protected virtual Task<int> DeleteAsync(Expression<Func<TEntity, bool>> deleteCondition, CancellationToken token)
+    {
+        Context.Remove(deleteCondition);
+        return Context.SaveChangesAsync(token);
+    }
+
     /// <summary>
     /// Throws an exception if the command is null or cancellation is requested.
     /// </summary>
