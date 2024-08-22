@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6;Net7</TargetFrameworks>
-		<LangVersion>11</LangVersion>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;Net6;Net7;Net8</TargetFrameworks>
+		<LangVersion>12</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<RootNamespace>Olbrasoft.Data.Entities.Abstractions</RootNamespace>
@@ -42,5 +42,6 @@
 	<ItemGroup>
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 	</ItemGroup>
+
 
 </Project>

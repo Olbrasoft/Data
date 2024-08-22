@@ -2,11 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Olbrasoft.Data.Entities.Abstractions;
 
-public abstract class CreationInfo<TUser> : ICreatorInfo<TUser>, IHaveCreated, IHaveId
+public abstract class CreationInfo<TUser> : BaseEnity, ICreatorInfo<TUser>, IHaveCreated
 {
-    public int Id { get; set; }
-
-
     [Required]
     public int CreatorId { get; set; }
 

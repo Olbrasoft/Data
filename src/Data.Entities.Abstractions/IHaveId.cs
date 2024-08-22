@@ -1,4 +1,4 @@
-namespace Olbrasoft.Data.Entities;
+namespace Olbrasoft.Data.Entities.Abstractions;
 public interface IHaveId
 
 {

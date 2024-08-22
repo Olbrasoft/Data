@@ -52,23 +52,6 @@ public class ServiceCollectionExtensionsTests
     }
 
 
-    //AddCqrs return CqrsBuilder
-    [Fact]
-    public void AddCqrsReturnCqrsBuilder()
-    {
-        //Arrange
-        var type = typeof(ServiceCollectionExtensions);
-
-        var method = type.GetMethod("AddCqrs");
-
-        //Act
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-        var result = method.ReturnType;
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-
-        //Assert
-        Assert.Equal(typeof(CqrsBuilder), result);
-    }
 
     //AddCqrs register PingCommandHandler
     [Fact]
@@ -80,7 +63,7 @@ public class ServiceCollectionExtensionsTests
         var assemblies = new[] { typeof(PingCommandHandler).Assembly };
 
         //Act
-        services.AddCqrs(assemblies);
+        services.AddCqrs(ServiceLifetime.Transient, assemblies);
 
 
         var provider = services.BuildServiceProvider();
@@ -93,25 +76,7 @@ public class ServiceCollectionExtensionsTests
     }
 
 
-    //AddCqrs throw ArgumentNullException when assemblies is null
-    [Fact]
-    public void AddCqrsThrowArgumentNullExceptionWhenAssembliesIsNull()
-    {
-        //Arrange
-        var services = new ServiceCollection();
-
-#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
-        Assembly[] assemblies = null;
-#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
-
-        //Act
-#pragma warning disable CS8604 // Possible null reference argument.
-        var exception = Assert.Throws<ArgumentNullException>(() => services.AddCqrs(assemblies));
-#pragma warning restore CS8604 // Possible null reference argument.
-
-        //Assert
-        Assert.Equal("assemblies", exception.ParamName);
-    }
+ 
 
     //AddCqrs register ICommandExecutor
     [Fact]
@@ -123,7 +88,7 @@ public class ServiceCollectionExtensionsTests
         var assemblies = new[] { typeof(PingCommandHandler).Assembly };
 
         //Act
-        services.AddCqrs(assemblies);
+        services.AddCqrs(ServiceLifetime.Transient,assemblies);
 
         var provider = services.BuildServiceProvider();
 
@@ -143,7 +108,7 @@ public class ServiceCollectionExtensionsTests
         var assemblies = new[] { typeof(Ping).Assembly };
 
         //Act
-        services.AddCqrs(assemblies);
+        services.AddCqrs(ServiceLifetime.Transient, assemblies);
 
         var provider = services.BuildServiceProvider();
 
@@ -151,6 +116,81 @@ public class ServiceCollectionExtensionsTests
 
         //Assert
         Assert.IsType<QueryProcessor>(result);
+    }
+
+    //AddCqrs with assemblies register PingCommandHandler
+    [Fact]
+    public void AddCqrsWithAssembliesRegisterPingCommandHandler()
+    {
+        //Arrange
+        var services = new ServiceCollection();
+
+        var assemblies = new[] { typeof(PingCommandHandler).Assembly };
+
+        //Act
+        services.AddCqrs(assemblies);
+
+        var provider = services.BuildServiceProvider();
+
+        var result = provider.GetRequiredService<IRequestHandler<PingCommand, object>>();
+
+        //Assert
+        Assert.IsType<PingCommandHandler>(result);
+    }
+
+    //AddCqrs with Action<CqrsServiceConfiguration> register RequestHandlerMediator
+    [Fact]
+    public void AddCqrsWithActionRegisterRequestHandlerMediator()
+    {
+        //Arrange
+        var services = new ServiceCollection();
+
+        //Act
+        services.AddCqrs(cfg => { cfg.MediatorImplementationType = typeof(RequestHandlerMediator);
+        cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));   
+        });
+
+        var provider = services.BuildServiceProvider();
+
+        var result = provider.GetRequiredService<IMediator>();
+
+        //Assert
+        Assert.IsType<RequestHandlerMediator>(result);
+    }
+
+    //AddCqrs with assemblies whe assemblies is empty throw ArgumentException
+    [Fact]
+    public void AddCqrsWithAssembliesWhenAssembliesIsEmptyThrowArgumentException()
+    {
+        //Arrange
+        var services = new ServiceCollection();
+
+        var assemblies = new Assembly[] { };
+
+        //Act
+        var exception = Assert.Throws<ArgumentException>(() => services.AddCqrs(assemblies));
+
+        //Assert
+        Assert.Equal("No assemblies found to scan. Supply at least one assembly to scan for handlers.", exception.Message);
+    }
+
+    //AddCqrs throw InvalidOperationException when unknown mediator implementation type
+    [Fact]
+    public void AddCqrsThrowInvalidOperationExceptionWhenUnknownMediatorImplementationType()
+    {
+        //Arrange
+        var services = new ServiceCollection();
+
+        //Act
+        var exception = Assert.Throws<InvalidOperationException>(() => services.AddCqrs( cfg => 
+            {
+                cfg.MediatorImplementationType = typeof(object);
+             cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));
+                       
+            }));
+
+        //Assert
+        Assert.Equal("Unknown mediator implementation type.", exception.Message);
     }
 
 

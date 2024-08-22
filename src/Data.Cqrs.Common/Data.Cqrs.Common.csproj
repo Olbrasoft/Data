@@ -10,7 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Mediation\src\Mediation\Mediation.csproj" />
+    <PackageReference Include="Olbrasoft.Mediation" Version="1.0.4" />
   </ItemGroup>
 
 	<ItemGroup>
