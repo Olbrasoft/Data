@@ -108,5 +108,8 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     /// </summary>
     /// <returns>The mapper instance.</returns>
     protected virtual IMapper GetMapper() => Mapper is null ? throw new NullReferenceException(nameof(Mapper)) : Mapper;
+
+
+   
 }
 

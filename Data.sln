@@ -31,8 +31,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Paging.X.PagedList.Asp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Paging.X.PagedList.AspNetCore.Mvc.Example", "src\Data.Paging.X.PagedList.AspNetCore.Mvc.Example\Data.Paging.X.PagedList.AspNetCore.Mvc.Example.csproj", "{C2DCAD80-2EDB-4373-90BA-01AA1A28073C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs", "src\Data.Cqrs\Data.Cqrs.csproj", "{F885A55C-BE75-491A-8247-AAA02630C5F9}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.Tests", "test\Data.Cqrs.Tests\Data.Cqrs.Tests.csproj", "{68759E52-F383-4A68-9ADC-2D4FCE3006C7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.EntityFrameworkCore", "src\Data.Cqrs.EntityFrameworkCore\Data.Cqrs.EntityFrameworkCore.csproj", "{8A0CC228-0815-4E37-A3FF-7A97CA6A1383}"
@@ -54,6 +52,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Entities.Identity.Tests", "test\Data.Entities.Identity.Tests\Data.Entities.Identity.Tests.csproj", "{F9692F54-A101-425B-9A84-EC41F4E82BD7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Entities.Abstractions", "src\Data.Entities.Abstractions\Data.Entities.Abstractions.csproj", "{577878F0-C09D-460E-965B-0FD498A6CBF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Cqrs.Common", "src\Data.Cqrs.Common\Data.Cqrs.Common.csproj", "{0C56AB71-DDB9-4AA9-ABCA-639D33B21EBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,10 +101,6 @@ Global
 		{C2DCAD80-2EDB-4373-90BA-01AA1A28073C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2DCAD80-2EDB-4373-90BA-01AA1A28073C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2DCAD80-2EDB-4373-90BA-01AA1A28073C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F885A55C-BE75-491A-8247-AAA02630C5F9}.Debug|Any CPU.ActiveCfg = Release|Any CPU
-		{F885A55C-BE75-491A-8247-AAA02630C5F9}.Debug|Any CPU.Build.0 = Release|Any CPU
-		{F885A55C-BE75-491A-8247-AAA02630C5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F885A55C-BE75-491A-8247-AAA02630C5F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{68759E52-F383-4A68-9ADC-2D4FCE3006C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68759E52-F383-4A68-9ADC-2D4FCE3006C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68759E52-F383-4A68-9ADC-2D4FCE3006C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -149,6 +145,10 @@ Global
 		{577878F0-C09D-460E-965B-0FD498A6CBF6}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{577878F0-C09D-460E-965B-0FD498A6CBF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{577878F0-C09D-460E-965B-0FD498A6CBF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C56AB71-DDB9-4AA9-ABCA-639D33B21EBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C56AB71-DDB9-4AA9-ABCA-639D33B21EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C56AB71-DDB9-4AA9-ABCA-639D33B21EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C56AB71-DDB9-4AA9-ABCA-639D33B21EBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

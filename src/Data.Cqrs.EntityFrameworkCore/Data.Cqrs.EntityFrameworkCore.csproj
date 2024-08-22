@@ -42,7 +42,8 @@
 	<ItemGroup>
 		<PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
 	</ItemGroup>
-	
+
+
 	<ItemGroup>
 	  <ProjectReference Include="..\Data.Cqrs.Common\Data.Cqrs.Common.csproj" />
 	</ItemGroup>

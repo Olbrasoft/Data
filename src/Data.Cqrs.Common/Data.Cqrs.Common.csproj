@@ -13,6 +13,10 @@
     <PackageReference Include="Olbrasoft.Mediation" Version="1.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Data.Entities.Abstractions\Data.Entities.Abstractions.csproj" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<Using Include="Olbrasoft.Mediation" />	
 		<Using Include="Olbrasoft.Mediation.Abstractions" />

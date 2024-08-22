@@ -1,4 +1,6 @@
-﻿namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
+﻿using Olbrasoft.Data.Entities.Abstractions;
+
+namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
 
 
 /// <summary>
@@ -75,6 +77,8 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
         return Context.SaveChangesAsync(token);
     }
 
+
+ 
     /// <summary>
     /// Gets the entity state of the specified entity.
     /// </summary>
@@ -126,6 +130,21 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     {
         if (Mapper is null) throw new NullReferenceException(nameof(Mapper));
         return Mapper.MapTo<TDestination>(source);
+    }
+
+
+    protected virtual Task<int> InsertAsync(TEntity entity,  CancellationToken token = default)
+    {
+
+        Context.Add(entity);
+        return Context.SaveChangesAsync(token);
+    }
+
+
+    protected virtual Task<int> UpdateAsync(TEntity entity, CancellationToken token = default)
+    {
+        Context.Update(entity);
+        return Context.SaveChangesAsync(token);
     }
 
 
