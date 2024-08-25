@@ -7,9 +7,9 @@ public class DbCommandHandlerTests
     public void DbCommandHandler_IsPublicClass()
     {
         //Arrange
-        var type = typeof(DbCommandHandler<,,,>);
+        Type type = typeof(DbCommandHandler<,,,>);
         //Act
-        var isPublic = type.IsPublic;
+        bool isPublic = type.IsPublic;
         //Assert
         Assert.True(isPublic);
     }
@@ -19,9 +19,9 @@ public class DbCommandHandlerTests
     public void DbCommandHandler_AssemblyShouldBe_MediatR_Cqrs_EntityFrameworkCore()
     {
         //Arrange
-        var type = typeof(DbCommandHandler<,,,>);
+        Type type = typeof(DbCommandHandler<,,,>);
         //Act
-        var assembly = type.Assembly.GetName().Name;
+        string? assembly = type.Assembly.GetName().Name;
         //Assert
         Assert.Equal("Olbrasoft.Data.Cqrs.EntityFrameworkCore", assembly);
     }
@@ -31,9 +31,9 @@ public class DbCommandHandlerTests
     public void DbCommandHandler_IsAnstractClass()
     {
         //Arrange
-        var type = typeof(DbCommandHandler<,,,>);
+        Type type = typeof(DbCommandHandler<,,,>);
         //Act
-        var isAbstract = type.IsAbstract;
+        bool isAbstract = type.IsAbstract;
         //Assert
         Assert.True(isAbstract);
     }
@@ -43,14 +43,12 @@ public class DbCommandHandlerTests
     public void DbCommandHandler_ShouldBeInheritFrom_DbHandler()
     {
         //Arrange
-        var type = typeof(DbCommandHandler<DbContext, PingBook, BaseCommand<string>, string>);
+        Type type = typeof(DbCommandHandler<DbContext, PingBook, BaseCommand<string>, string>);
         //Act
-        var isSubClass = typeof(DbRequestHandler<DbContext, PingBook, BaseCommand<string>, string>).IsAssignableFrom(type);
+        bool isSubClass = typeof(DbRequestHandler<DbContext, PingBook, BaseCommand<string>, string>).IsAssignableFrom(type);
         //Assert
         Assert.True(isSubClass);
     }
-
-    //Statict method ThrowIfCommandIsNullOrCancellationRequested throw CommandNullException when command is null
 
 
 

@@ -7,10 +7,10 @@ public class PingDbBaseCommandHandlerTests
     public void InheritsFromDbBaseCommandHandler_PingLibraryDbContext_PingBook_BaseCommand_PingBook()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
 
         //Act
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
         //Assert
         handler.Should().BeAssignableTo<DbBaseCommandHandler<PingLibraryDbContext, PingBook, PingBookBaseCommand, PingBook>>();
@@ -21,11 +21,11 @@ public class PingDbBaseCommandHandlerTests
     public async Task RemoveAndSaveAsync_ExpressionFuncPingBookBool_ShouldReturnCommandStatusDeleted()
     {
         //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        DbContextOptions<PingLibraryDbContext> options = new DbContextOptionsBuilder<PingLibraryDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        using var context = new PingLibraryDbContext(options);
+        using PingLibraryDbContext context = new(options);
 
         context.Database.EnsureCreated();
 
@@ -40,15 +40,15 @@ public class PingDbBaseCommandHandlerTests
 
         await context.SaveChangesAsync();
 
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
         //Act
-        var result = await handler.RemoveOneAndSaveAsync(x => x.Id == 2);
+        int result = await handler.DeleteAsync(x => x.Id == 2);
 
         context.Database.EnsureDeleted();
 
         //Assert
-        result.Should().Be(CommandStatus.Deleted);
+        result.Should().Be(1);
     }
 
     //RemoveAndSaveAsync when id < 1 should return CommandStatus.NotFound
@@ -56,11 +56,11 @@ public class PingDbBaseCommandHandlerTests
     public async Task RemoveAndSaveAsync_ExpressionFuncPingBookBool_ShouldReturnCommandStatusNotFound()
     {
         //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        DbContextOptions<PingLibraryDbContext> options = new DbContextOptionsBuilder<PingLibraryDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        using var context = new PingLibraryDbContext(options);
+        using PingLibraryDbContext context = new(options);
 
         context.Database.EnsureCreated();
         await context.AddRangeAsync(
@@ -71,15 +71,15 @@ public class PingDbBaseCommandHandlerTests
      ]);
 
         await context.SaveChangesAsync();
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
         //Act
-        var result = await handler.RemoveOneAndSaveAsync(x => x.Id < 0);
+        int result = await handler.DeleteAsync(x => x.Id < 0);
 
         context.Database.EnsureDeleted();
 
         //Assert
-        result.Should().Be(CommandStatus.NotFound);
+        result.Should().Be(0);
     }
 
     //Add test RemoveAndSaveAsync with parameter entity and entity added should return CommandStatus.Error
@@ -87,11 +87,11 @@ public class PingDbBaseCommandHandlerTests
     public async Task RemoveAndSaveAsync_PingBook_ShouldReturnCommandStatusError()
     {
         //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        DbContextOptions<PingLibraryDbContext> options = new DbContextOptionsBuilder<PingLibraryDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        using var context = new PingLibraryDbContext(options);
+        using PingLibraryDbContext context = new(options);
 
         context.Database.EnsureCreated();
 
@@ -104,19 +104,19 @@ public class PingDbBaseCommandHandlerTests
 
         await context.SaveChangesAsync();
 
-        var entity = new PingBook { Id = 8, Title = "Title 8" };
+        PingBook entity = new() { Id = 8, Title = "Title 8" };
 
         await context.AddAsync(entity);
 
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
         //Act
-        var result = await handler.RemoveOneAndSaveAsync(entity);
+        int result = await handler.DeleteAsync(entity);
 
         context.Database.EnsureDeleted();
 
         //Assert
-        result.Should().Be(CommandStatus.Error);
+        result.Should().Be(0);
     }
 
     //Add test AddAndSaveAsync with parameter entity and entity added should return CommandStatus.Created
@@ -124,84 +124,30 @@ public class PingDbBaseCommandHandlerTests
     public async Task AddAndSaveAsync_PingBook_ShouldReturnCommandStatusCreated()
     {
         //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        DbContextOptions<PingLibraryDbContext> options = new DbContextOptionsBuilder<PingLibraryDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        using var context = new PingLibraryDbContext(options);
+        using PingLibraryDbContext context = new(options);
 
         context.Database.EnsureCreated();
 
 
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
 
-        var entity = new PingBook { Title = "Title 1" };
+        PingBook entity = new() { Title = "Title 1" };
 
         //Act
 
-        var result = await handler.AddAndSaveAsync(entity);
+        int result = await handler.SaveAsync(entity);
 
 
         //Assert
-        result.Should().Be(CommandStatus.Created);
+        result.Should().Be(1);
 
     }
 
-    //Add test AddAndSaveAsync with parameter entity and entity added should return CommandStatus.Error
-    [Fact]
-    public async Task AddAndSaveAsync_PingBook_ShouldReturnCommandStatusError()
-    {
-        //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
-            .Options;
-
-        using var context = new PingLibraryDbContext(options);
-
-        context.Database.EnsureCreated();
-
-        var entity = new PingBook { Title = "Title 1" };
-
-        await context.AddAsync(entity);
-
-        var handler = new PingDbBaseCommandHandler(context);
-
-        //Act
-        var result = await handler.AddAndSaveAsync(entity);
-
-        context.Database.EnsureDeleted();
-
-        //Assert
-        result.Should().Be(CommandStatus.Error);
-    }
-
-
-    //Add test Update with parameter entity and entity updated should return EntityState.Modified
-    [Fact]
-    public void Update_PingBook_ShouldReturnEntityStateModified()
-    {
-        //Arrange
-        var entity = new PingBook { Title = "Title 1" };
-
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>()
-     .UseInMemoryDatabase("PingDbBooks")
-     .Options);
-
-        context.Database.EnsureCreated();
-
-        context.Books.Add(entity);
-
-        var handler = new PingDbBaseCommandHandler(context);
-
-        //Act
-        var result = handler.Update(entity);
-
-        context.Database.EnsureDeleted();
-
-        //Assert
-        result.State.Should().Be(EntityState.Modified);
-    }
 
 
     //Add test UpdateAndSaveAsync with parameter entity and entity updated should return CommandStatus.Sucess
@@ -209,97 +155,30 @@ public class PingDbBaseCommandHandlerTests
     public async Task UpdateAndSaveAsync_PingBook_ShouldReturnCommandStatusSucess()
     {
         //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        DbContextOptions<PingLibraryDbContext> options = new DbContextOptionsBuilder<PingLibraryDbContext>()
             .UseInMemoryDatabase(Guid.NewGuid().ToString())
             .Options;
 
-        using var context = new PingLibraryDbContext(options);
+        using PingLibraryDbContext context = new(options);
 
         context.Database.EnsureCreated();
 
-        var entity = context.Set<PingBook>().First();
+        PingBook entity = context.Set<PingBook>().First();
 
         entity.Title = "Title 2";
 
-        var handler = new PingDbBaseCommandHandler(context);
+        PingDbBaseCommandHandler handler = new(context);
 
         //Act
-        var result = await handler.UpdateAndSaveAsync(entity);
+        int result = await handler.SaveAsync(entity);
 
         context.Database.EnsureDeleted();
 
         //Assert
-        result.Should().Be(CommandStatus.Success);
+        result.Should().Be(1);
     }
 
-    //Add test SaveAsync with parameter entity and entity not updated should return CommandStatus.Unchanged
-    [Fact]
-    public async Task SaveAsync_PingBook_ShouldReturnCommandStatusUnchanged()
-    {
-        //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
-            .Options;
 
-        using var context = new PingLibraryDbContext(options);
-
-        context.Database.EnsureCreated();
-
-        var entity = context.Set<PingBook>().First();
-
-
-        var handler = new PingDbBaseCommandHandler(context);
-
-        //Act
-        var result = await handler.SaveAsync(entity);
-
-        context.Database.EnsureDeleted();
-
-        //Assert
-        result.Should().Be(CommandStatus.Unchanged);
-    }
-
-    //Add test SaveAsync with parameter entity and entity Detached should return State error
-    [Fact]
-    public async Task SaveAsync_PingBook_ShouldReturnCommandStatusError()
-    {
-        //Arrange
-        var options = new DbContextOptionsBuilder<PingLibraryDbContext>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString())
-            .Options;
-
-        using var context = new PingLibraryDbContext(options);
-
-        context.Database.EnsureCreated();
-
-        var entity = new PingBook { Id = 1, Title = "Title 1" };
-
-        var handler = new PingDbBaseCommandHandler(context);
-
-        //Act
-        var result = await handler.SaveAsync(entity);
-
-        context.Database.EnsureDeleted();
-
-        //Assert
-        result.Should().Be(CommandStatus.Error);
-    }
-
-    //add test ThrowIfCommandStatusCannotBeSet with parameter CommandStatus.Created should throw exception
-    [Fact]
-    public void ThrowIfCommandStatusCannotBeSet_CommandStatusCreated_ShoulThrowException()
-    {
-        //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-
-        var handler = new PingDbBaseCommandHandler(context);
-
-        //Act
-        Action act = () => handler.ThrowIfCommandStatusCannotBeSet(CommandStatus.Created);
-
-        //Assert
-        act.Should().Throw<InvalidOperationException>();
-    }
 
 
     //Constructor with IProjector parameter should set Projector property
@@ -307,12 +186,12 @@ public class PingDbBaseCommandHandlerTests
     public void Constructor_IProjector_ShouldSetProjectorProperty()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
 
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
 
         //Act
-        var handler = new PingDbBaseCommandHandler(projector, context);
+        PingDbBaseCommandHandler handler = new(projector, context);
 
         //Assert
         handler.Projector.Should().Be(projector);
@@ -323,12 +202,12 @@ public class PingDbBaseCommandHandlerTests
     public void Constructor_IMapper_ShouldSetMapperProperty()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
 
-        var mapper = new Olbrasoft.Mapping.Mapster.MapsterMapper(new MapsterMapper.Mapper());
+        Olbrasoft.Mapping.Mapster.MapsterMapper mapper = new(new MapsterMapper.Mapper());
 
         //Act
-        var handler = new PingDbBaseCommandHandler(mapper, context);
+        PingDbBaseCommandHandler handler = new(mapper, context);
 
         //Assert
         handler.Mapper.Should().Be(mapper);
@@ -339,13 +218,13 @@ public class PingDbBaseCommandHandlerTests
     public void Constructor_IProjector_IMapper_ShouldSetProjectorAndMapperProperty()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
 
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var mapper = new Olbrasoft.Mapping.Mapster.MapsterMapper(new MapsterMapper.Mapper());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        Olbrasoft.Mapping.Mapster.MapsterMapper mapper = new(new MapsterMapper.Mapper());
 
         //Act
-        var handler = new PingDbBaseCommandHandler(projector, mapper, context);
+        PingDbBaseCommandHandler handler = new(projector, mapper, context);
 
         //Assert
         handler.Projector.Should().Be(projector);

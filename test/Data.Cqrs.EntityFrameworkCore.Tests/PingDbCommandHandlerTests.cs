@@ -6,10 +6,10 @@ public class PingDbCommandHandlerTests
     public void Constructor_PingLibraryDbContext_ShouldSetContext()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
 
         //Act
-        var handler = new PingDbCommandHandler(context);
+        PingDbCommandHandler handler = new(context);
 
         //Assert
         context.Should().BeSameAs(handler.Context);
@@ -20,11 +20,11 @@ public class PingDbCommandHandlerTests
     public void Constructor_IProjector_PingLibraryDbContext_ShouldSetProjectorAndContext()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var projector = new Mock<IProjector>().Object;
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        IProjector projector = new Mock<IProjector>().Object;
 
         //Act
-        var handler = new PingDbCommandHandler(projector, context);
+        PingDbCommandHandler handler = new(projector, context);
 
         //Assert
         projector.Should().BeSameAs(handler.Projector);
@@ -36,11 +36,11 @@ public class PingDbCommandHandlerTests
     public void Constructor_IMapper_PingLibraryDbContext_ShouldSetMapperAndContext()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var mapper = new Mock<IMapper>().Object;
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        IMapper mapper = new Mock<IMapper>().Object;
 
         //Act
-        var handler = new PingDbCommandHandler(mapper, context);
+        PingDbCommandHandler handler = new(mapper, context);
 
         //Assert
         mapper.Should().BeSameAs(handler.Mapper);
@@ -52,8 +52,8 @@ public class PingDbCommandHandlerTests
     public void Constructor_IProjector_IMapper_PingLibraryDbContext_ShouldThrowArgumentNullExceptionWhenMapperIsNull()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var projector = new Mock<IProjector>().Object;
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        IProjector projector = new Mock<IProjector>().Object;
 
         //Act
         Action action = () => new PingDbCommandHandler(projector, null!, context);
@@ -67,12 +67,12 @@ public class PingDbCommandHandlerTests
     public void Constructor_IProjector_IMapper_PingLibraryDbContext_ShouldSetProjectorMapperAndContext()
     {
         //Arrange
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var projector = new Mock<IProjector>().Object;
-        var mapper = new Mock<IMapper>().Object;
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        IProjector projector = new Mock<IProjector>().Object;
+        IMapper mapper = new Mock<IMapper>().Object;
 
         //Act
-        var handler = new PingDbCommandHandler(projector, mapper, context);
+        PingDbCommandHandler handler = new(projector, mapper, context);
 
         //Assert
         projector.Should().BeSameAs(handler.Projector);
@@ -85,8 +85,8 @@ public class PingDbCommandHandlerTests
     public async Task SaveOneEntityAsync_ShouldCallSaveChangesAsyncOnContext()
     {
         //Arrange
-        var context = new Mock<PingLibraryDbContext>(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var handler = new PingDbCommandHandler(context.Object);
+        Mock<PingLibraryDbContext> context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingDbCommandHandler handler = new(context.Object);
 
         //Act
         await handler.SaveOneEntityAsync();
@@ -101,8 +101,8 @@ public class PingDbCommandHandlerTests
     public async Task SaveChangesAsync_ShouldReturnIntAndCallSaveChangesAsyncOnContext()
     {
         //Arrange
-        var context = new Mock<PingLibraryDbContext>(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
-        var handler = new PingDbCommandHandler(context.Object);
+        Mock<PingLibraryDbContext> context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingDbCommandHandler handler = new(context.Object);
 
         //Act
         int result = await handler.SaveChangesAsync();
@@ -126,18 +126,18 @@ public class PingDbCommandHandlerTests
         action.Should().Throw<ArgumentNullException>();
     }
 
-    //MapCommandToNewEntity verify call Mapper.MapSourceToNewDestination
+    //CreateEntity verify call Mapper.MapSourceToNewDestination
     [Fact]
     public void MapCommandToNewEntity_ShouldCallMapperMapSourceToNewDestination()
     {
         //Arrange
-        var command = new Mock<BaseCommand<string>>().Object;
+        BaseCommand<string> command = new Mock<BaseCommand<string>>().Object;
 
-        var mapper = new Mock<IMapper>();
-        var handler = new PingDbCommandHandler(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
+        Mock<IMapper> mapper = new();
+        PingDbCommandHandler handler = new(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
 
         //Act
-        handler.MapCommandToNewEntity(command);
+        handler.CreateEntity(command);
         //Assert
         mapper.Verify(m => m.MapTo<PingBook>(command), Times.Once);
     }
@@ -147,11 +147,11 @@ public class PingDbCommandHandlerTests
     public void MapCommandToExistingEntity_ShouldCallMapperMapSourceToExistingDestination()
     {
         //Arrange
-        var command = new Mock<BaseCommand<string>>().Object;
-        var entity = new Mock<PingBook>().Object;
+        BaseCommand<string> command = new Mock<BaseCommand<string>>().Object;
+        PingBook entity = new Mock<PingBook>().Object;
 
-        var mapper = new Mock<IMapper>();
-        var handler = new PingDbCommandHandler(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
+        Mock<IMapper> mapper = new();
+        PingDbCommandHandler handler = new(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
 
         //Act
         handler.MapCommandToExistingEntity(command, entity);
@@ -164,10 +164,10 @@ public class PingDbCommandHandlerTests
     public void MapTo_ShouldCallMapperMapTo()
     {
         //Arrange
-        var source = new Mock<object>().Object;
+        object source = new Mock<object>().Object;
 
-        var mapper = new Mock<IMapper>();
-        var handler = new PingDbCommandHandler(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
+        Mock<IMapper> mapper = new();
+        PingDbCommandHandler handler = new(mapper.Object, new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>().Options));
 
         //Act
         handler.MapTo<object>(source);
@@ -180,17 +180,17 @@ public class PingDbCommandHandlerTests
     public void GetEntityState_ShouldReturnEntityStateDetached()
     {
         //Arrange
-        var entity = new PingBook();
+        PingBook entity = new();
 
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>()
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>()
      .UseInMemoryDatabase("PingDbBooks")
      .Options);
 
 
-        var handler = new PingDbCommandHandler(context);
+        PingDbCommandHandler handler = new(context);
 
         //Act
-        var result = handler.GetEntityState(entity);
+        EntityState result = handler.GetEntityState(entity);
 
         //Assert
         result.Should().Be(EntityState.Detached);
@@ -201,25 +201,40 @@ public class PingDbCommandHandlerTests
     public void GetEntityState_ShouldReturnEntityStateAdded()
     {
         //Arrange
-        var entity = new PingBook();
+        PingBook entity = new();
 
 
 
-        var context = new PingLibraryDbContext(new DbContextOptionsBuilder<PingLibraryDbContext>()
+        PingLibraryDbContext context = new(new DbContextOptionsBuilder<PingLibraryDbContext>()
      .UseInMemoryDatabase("PingDbBooks")
      .Options);
         context.Books.Add(entity);
 
-        var handler = new PingDbCommandHandler(context);
+        PingDbCommandHandler handler = new(context);
 
         //Act
-        var result = handler.GetEntityState(entity);
+        EntityState result = handler.GetEntityState(entity);
 
         //Assert
         result.Should().Be(EntityState.Added);
     }
 
+    //InsertAsync verify call AddAsync on Context and verify call SaveChangesAsync on Context
+    [Fact]
+    public async Task InsertAsync_ShouldCallAddAsyncAndSaveChangesAsyncOnContext()
+    {
+        //Arrange
+        PingBook entity = new();
+        Mock<PingLibraryDbContext> context = new(new DbContextOptionsBuilder<PingLibraryDbContext>().Options);
+        PingDbCommandHandler handler = new(context.Object);
 
+        //Act
+        await handler.InsertAsync(entity, default);
+
+        //Assert
+        context.Verify(c => c.Add(entity), Times.Once);
+        context.Verify(c => c.SaveChangesAsync(default), Times.Once);
+    }
 
 
 }

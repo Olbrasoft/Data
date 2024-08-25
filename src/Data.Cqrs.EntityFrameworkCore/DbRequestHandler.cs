@@ -49,9 +49,9 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// <summary>
     /// Query conditions，Where(a => a.Id > 10)，Support navigation object query，Where(a => a.Author.Email == "2881099@qq.com")
     /// </summary>
-    /// <param name="expression">lambda expression</param>
+    /// <param name="condition">lambda condition</param>
     /// <returns>Queryable where</returns>
-    protected IQueryable<TEntity> GetWhere(Expression<Func<TEntity, bool>> expression) => Entities.Where(expression);
+    protected IQueryable<TEntity> Where(Expression<Func<TEntity, bool>> condition) => Entities.Where(condition);
 
     /// <summary>
     /// Sort by column ascending，OrderBy(a => a.Time)
@@ -59,7 +59,7 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// <typeparam name="TMember">property/column to sort by ascending</typeparam>
     /// <param name="columnSelector">Selector property/column for ascending order</param>
     /// <returns>Ascending selection</returns>
-    protected IOrderedQueryable<TEntity> GetOrderBy<TMember>(Expression<Func<TEntity, TMember>> columnSelector) => Entities.OrderBy(columnSelector);
+    protected IOrderedQueryable<TEntity> OrderBy<TMember>(Expression<Func<TEntity, TMember>> columnSelector) => Entities.OrderBy(columnSelector);
 
     /// <summary>
     /// Sort by column descending，OrderByDescending(a => a.Time)
@@ -67,7 +67,7 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// <typeparam name="TMember">property/column to sort by descending</typeparam>
     /// <param name="columnSelector">Selector property/column for descending order</param>
     /// <returns>Descending selection</returns>
-    protected IOrderedQueryable<TEntity> GetOrderByDescending<TMember>(Expression<Func<TEntity, TMember>> columnSelector)
+    protected IOrderedQueryable<TEntity> OrderByDescending<TMember>(Expression<Func<TEntity, TMember>> columnSelector)
         => Entities.OrderByDescending(columnSelector);
 
     #region ExistsAsync
@@ -77,7 +77,7 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// </summary>
     /// <param name="token">Cancellation token</param>
     /// <returns>True if any entity exists, otherwise false</returns>
-    protected Task<bool> ExistsAsync(CancellationToken token = default) => Entities.AnyAsync(token);
+    protected Task<bool> AnyAsync(CancellationToken token = default) => Entities.AnyAsync(token);
 
     /// <summary>
     /// Checks if any entity exists in the database that matches the specified predicate.
@@ -85,7 +85,7 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// <param name="predicate">The predicate to filter the entities</param>
     /// <param name="token">Cancellation token</param>
     /// <returns>True if any entity exists, otherwise false</returns>
-    protected Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token = default)
+    protected Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken token = default)
         => Entities.AnyAsync(predicate, token);
 
     #endregion
@@ -125,26 +125,35 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
      => await queryable.ToArrayAsync(token);
 
     /// <summary>
-    /// Retrieves a collection of entities from the database that match the specified expression and projects them to the specified destination type.
+    /// Retrieves a collection of entities from the database that match the specified condition and projects them to the specified destination type.
     /// </summary>
     /// <typeparam name="TDestination">The type of the destination</typeparam>
-    /// <param name="expression">The expression to filter the entities</param>
+    /// <param name="expression">The condition to filter the entities</param>
     /// <param name="token">Cancellation token</param>
     /// <returns>Collection of projected entities</returns>
     protected async Task<IEnumerable<TDestination>> GetEnumerableAsync<TDestination>(Expression<Func<TEntity, bool>> expression, CancellationToken token = default)
      where TDestination : new()
-      => await ProjectTo<TDestination>(GetWhere(expression)).ToArrayAsync(token);
+      => await ProjectTo<TDestination>(Where(expression)).ToArrayAsync(token);
 
     /// <summary>
-    /// Retrieves a collection of entities from the database that match the specified expression.
+    /// Retrieves a collection of entities from the database that match the specified condition.
     /// </summary>
-    /// <param name="expression">The expression to filter the entities</param>
+    /// <param name="expression">The condition to filter the entities</param>
     /// <param name="token">Cancellation token</param>
     /// <returns>Collection of entities</returns>
     protected async Task<IEnumerable<TEntity>> GetEnumerableAsync(Expression<Func<TEntity, bool>> expression, CancellationToken token)
-     => await GetWhere(expression).ToArrayAsync(token);
+     => await Where(expression).ToArrayAsync(token);
 
-    #endregion
+    #endregion GetEnumerableAsync
+
+
+    protected virtual async Task<TForeignEntity[]> GetArrayAsync<TForeignEntity>(Expression<Func<TForeignEntity, bool>> condition, CancellationToken token = default) where TForeignEntity : class
+    {
+        return await Context.Set<TForeignEntity>().Where(condition).ToArrayAsync(token);
+    }
+
+
+
 
     #region GetOneOrNullAsync
 
@@ -168,27 +177,29 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
           => ProjectTo<TDestination>(queryable).SingleOrDefaultAsync(token);
 
     /// <summary>
-    /// Retrieves a single entity from the database that matches the specified expression or null if no entity is found.
+    /// Retrieves a single entity from the database that matches the specified condition or null if no entity is found.
     /// </summary>
-    /// <param name="expression">The expression to filter the entity</param>
+    /// <param name="expression">The condition to filter the entity</param>
     /// <param name="token">Cancellation token</param>
     /// <returns>The retrieved entity or null</returns>
     protected Task<TEntity?> GetOneOrNullAsync(Expression<Func<TEntity, bool>> expression, CancellationToken token)
-    => GetOneOrNullAsync(GetWhere(expression), token);
+    => GetOneOrNullAsync(Where(expression), token);
 
 
     /// <summary>
-    /// Retrieves a single entity from the database that matches the specified expression and projects it to the specified destination type or null if no entity is found.
+    /// Retrieves a single entity from the database that matches the specified condition and projects it to the specified destination type or null if no entity is found.
     /// </summary>
     /// <typeparam name="TDestination">The type of the destination</typeparam>
-    /// <param name="expression">The expression to filter the entity</param>
+    /// <param name="condition">The condition to filter the entity</param>
     /// <param name="token">Cancellation token</param>
     /// <returns>The projected entity or null</returns>
-    protected Task<TDestination?> GetOneOrNullAsync<TDestination>(Expression<Func<TEntity, bool>> expression, CancellationToken token = default)
+    protected Task<TDestination?> GetOneOrNullAsync<TDestination>(Expression<Func<TEntity, bool>> condition, CancellationToken token = default)
     where TDestination : new()
-         => GetOneOrNullAsync<TDestination>(GetWhere(expression), token);
+         => GetOneOrNullAsync<TDestination>(Where(condition), token);
 
-    #endregion
+    #endregion GetOneOrNullAsync
+
+
 
     /// <summary>
     /// Handles the database request and returns the result.
@@ -209,4 +220,9 @@ public abstract class DbRequestHandler<TContext, TEntity, TRequest, TResult>(TCo
     /// <exception cref="NullReferenceException">Thrown when the projector is null</exception>
     protected IQueryable<TDestination> ProjectTo<TDestination>(IQueryable source)
        => Projector is null ? throw new NullReferenceException(nameof(Projector)) : Projector.ProjectTo<TDestination>(source);
+
+
+    protected virtual IQueryable<TDestination> ProjectTo<TDestination>(Expression<Func<TEntity, bool>> condition)
+        => ProjectTo<TDestination>(Where(condition));
+
 }

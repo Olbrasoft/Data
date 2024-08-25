@@ -14,8 +14,8 @@ public class ServiceCollectionExtensionsTests
         Type type = typeof(ServiceCollectionExtensions);
 
         //Act
-        var isPublic = type.IsPublic;
-        var isStatic = type.IsAbstract && type.IsSealed;
+        bool isPublic = type.IsPublic;
+        bool isStatic = type.IsAbstract && type.IsSealed;
 
         //Assert
         Assert.True(isPublic);
@@ -27,10 +27,10 @@ public class ServiceCollectionExtensionsTests
     public void AssemlyIsDataCqrsCommon()
     {
         //Arrange
-        var type = typeof(ServiceCollectionExtensions);
+        Type type = typeof(ServiceCollectionExtensions);
 
         //Act
-        var result = type.Assembly.GetName().Name;
+        string? result = type.Assembly.GetName().Name;
 
         //Assert
         Assert.Equal("Olbrasoft.Data.Cqrs.Common", result);
@@ -42,10 +42,10 @@ public class ServiceCollectionExtensionsTests
     public void NamespaceIsOlbrasoftExtensionsDependencyInjection()
     {
         //Arrange
-        var type = typeof(ServiceCollectionExtensions);
+        Type type = typeof(ServiceCollectionExtensions);
 
         //Act
-        var result = type.Namespace;
+        string? result = type.Namespace;
 
         //Assert
         Assert.Equal("Olbrasoft.Data.Cqrs", result);
@@ -58,41 +58,41 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsRegisterPingCommandHandler()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
-        var assemblies = new[] { typeof(PingCommandHandler).Assembly };
+        Assembly[] assemblies = new[] { typeof(PingCommandHandler).Assembly };
 
         //Act
         services.AddCqrs(ServiceLifetime.Transient, assemblies);
 
 
-        var provider = services.BuildServiceProvider();
+        ServiceProvider provider = services.BuildServiceProvider();
 
 
-        var result = provider.GetRequiredService<IRequestHandler<PingCommand, object>>();
+        IRequestHandler<PingCommand, object> result = provider.GetRequiredService<IRequestHandler<PingCommand, object>>();
 
         //Assert
         Assert.IsType<PingCommandHandler>(result);
     }
 
 
- 
+
 
     //AddCqrs register ICommandExecutor
     [Fact]
     public void AddCqrsRegisterICommandExecutor()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
-        var assemblies = new[] { typeof(PingCommandHandler).Assembly };
+        Assembly[] assemblies = new[] { typeof(PingCommandHandler).Assembly };
 
         //Act
-        services.AddCqrs(ServiceLifetime.Transient,assemblies);
+        services.AddCqrs(ServiceLifetime.Transient, assemblies);
 
-        var provider = services.BuildServiceProvider();
+        ServiceProvider provider = services.BuildServiceProvider();
 
-        var result = provider.GetRequiredService<ICommandExecutor>();
+        ICommandExecutor result = provider.GetRequiredService<ICommandExecutor>();
 
         //Assert
         Assert.IsType<CommandExecutor>(result);
@@ -103,16 +103,16 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsRegisterIQueryProcessor()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
-        var assemblies = new[] { typeof(Ping).Assembly };
+        Assembly[] assemblies = new[] { typeof(Ping).Assembly };
 
         //Act
         services.AddCqrs(ServiceLifetime.Transient, assemblies);
 
-        var provider = services.BuildServiceProvider();
+        ServiceProvider provider = services.BuildServiceProvider();
 
-        var result = provider.GetRequiredService<IQueryProcessor>();
+        IQueryProcessor result = provider.GetRequiredService<IQueryProcessor>();
 
         //Assert
         Assert.IsType<QueryProcessor>(result);
@@ -123,16 +123,16 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsWithAssembliesRegisterPingCommandHandler()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
-        var assemblies = new[] { typeof(PingCommandHandler).Assembly };
+        Assembly[] assemblies = new[] { typeof(PingCommandHandler).Assembly };
 
         //Act
         services.AddCqrs(assemblies);
 
-        var provider = services.BuildServiceProvider();
+        ServiceProvider provider = services.BuildServiceProvider();
 
-        var result = provider.GetRequiredService<IRequestHandler<PingCommand, object>>();
+        IRequestHandler<PingCommand, object> result = provider.GetRequiredService<IRequestHandler<PingCommand, object>>();
 
         //Assert
         Assert.IsType<PingCommandHandler>(result);
@@ -143,16 +143,18 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsWithActionRegisterRequestHandlerMediator()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
         //Act
-        services.AddCqrs(cfg => { cfg.MediatorImplementationType = typeof(RequestHandlerMediator);
-        cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));   
+        services.AddCqrs(cfg =>
+        {
+            cfg.MediatorImplementationType = typeof(RequestHandlerMediator);
+            cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));
         });
 
-        var provider = services.BuildServiceProvider();
+        ServiceProvider provider = services.BuildServiceProvider();
 
-        var result = provider.GetRequiredService<IMediator>();
+        IMediator result = provider.GetRequiredService<IMediator>();
 
         //Assert
         Assert.IsType<RequestHandlerMediator>(result);
@@ -163,12 +165,12 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsWithAssembliesWhenAssembliesIsEmptyThrowArgumentException()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
-        var assemblies = new Assembly[] { };
+        Assembly[] assemblies = new Assembly[] { };
 
         //Act
-        var exception = Assert.Throws<ArgumentException>(() => services.AddCqrs(assemblies));
+        ArgumentException exception = Assert.Throws<ArgumentException>(() => services.AddCqrs(assemblies));
 
         //Assert
         Assert.Equal("No assemblies found to scan. Supply at least one assembly to scan for handlers.", exception.Message);
@@ -179,18 +181,17 @@ public class ServiceCollectionExtensionsTests
     public void AddCqrsThrowInvalidOperationExceptionWhenUnknownMediatorImplementationType()
     {
         //Arrange
-        var services = new ServiceCollection();
+        ServiceCollection services = new();
 
         //Act
-        var exception = Assert.Throws<InvalidOperationException>(() => services.AddCqrs( cfg => 
-            {
-                cfg.MediatorImplementationType = typeof(object);
-             cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));
-                       
-            }));
+        InvalidOperationException exception = Assert.Throws<InvalidOperationException>(() => services.AddCqrs(cfg =>
+        {
+            cfg.MediatorImplementationType = typeof(object);
+            cfg.RegisterServicesFromAssemblyContaining(typeof(Ping));
+        }));
 
         //Assert
-        Assert.Equal("Unknown mediator implementation type.", exception.Message);
+        Assert.Equal("Invalid mediator implementation type", exception.Message);
     }
 
 

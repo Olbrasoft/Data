@@ -1,6 +1,4 @@
-﻿using Olbrasoft.Data.Entities.Abstractions;
-
-namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
+﻿namespace Olbrasoft.Data.Cqrs.EntityFrameworkCore;
 
 
 /// <summary>
@@ -15,8 +13,10 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     where TEntity : class
     where TCommand : ICommand<TResult>
 {
+    /// <summary>
+    /// Gets or sets the mapper used for mapping objects.
+    /// </summary>
     protected virtual IMapper? Mapper { get; }
-
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DbCommandHandler{TContext, TEntity, TCommand, TResult}"/> class.
@@ -38,9 +38,9 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
     /// <summary>
     /// Initializes a new instance of the <see cref="DbCommandHandler{TContext, TEntity, TCommand, TResult}"/> class.
     /// </summary>
-    /// <param name="mapper"></param>
-    /// <param name="context"></param>
-    /// <exception cref="ArgumentNullException"></exception>
+    /// <param name="mapper">The mapper.</param>
+    /// <param name="context">The database context.</param>
+    /// <exception cref="ArgumentNullException">Thrown when the mapper is null.</exception>
     protected DbCommandHandler(IMapper mapper, TContext context) : this(context)
     {
         Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -77,15 +77,12 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
         return Context.SaveChangesAsync(token);
     }
 
-
- 
     /// <summary>
     /// Gets the entity state of the specified entity.
     /// </summary>
     /// <param name="entity">The entity object.</param>
     /// <returns>The entity state.</returns>
     protected virtual EntityState GetEntityState(object entity) => Context.Entry(entity).State;
-
 
     /// <summary>
     /// Throws an exception if the command is null or if cancellation is requested.
@@ -98,57 +95,61 @@ public abstract class DbCommandHandler<TContext, TEntity, TCommand, TResult> : D
         token.ThrowIfCancellationRequested();
 
         if (command is null) throw new ArgumentNullException(nameof(command));
-
     }
 
     /// <summary>
     /// Execute a mapping from the command to a new entity.
     /// The source type is inferred from the source object.
     /// </summary>
-    /// <param name="command">TCommand to map from</param>
-    /// <returns>Mapped entity</returns>
-    protected TEntity MapCommandToNewEntity(TCommand command)
+    /// <param name="command">The command to map from.</param>
+    /// <returns>The mapped entity.</returns>
+    protected TEntity CreateEntity(TCommand command)
         => Mapper is null ? throw new NullReferenceException(nameof(Mapper)) : Mapper.MapSourceToNewDestination<TEntity>(command);
 
     /// <summary>
     /// Execute a mapping from the command to the existing entity.
     /// </summary>
-    /// <param name="command">Command object to map from</param>
-    /// <param name="entity">Destination object to map into</param>
+    /// <param name="command">The command object to map from.</param>
+    /// <param name="entity">The destination object to map into.</param>
     /// <returns>The mapped destination object, same instance as the <paramref name="entity"/> object and returns.</returns>
     protected TEntity MapCommandToExistingEntity(TCommand command, TEntity entity)
         => Mapper is null ? throw new NullReferenceException(nameof(Mapper)) : Mapper.MapSourceToExistingDestination(command, entity);
 
     /// <summary>
-    /// Execute a mapping from the source object to the destination object of type TDestination.
+    /// Execute a mapping from the source object to the destination object of type <typeparamref name="TDestination"/>.
     /// </summary>
     /// <typeparam name="TDestination">The type of the destination object.</typeparam>
     /// <param name="source">The source object to map from.</param>
-    /// <returns>The mapped destination object of type TDestination.</returns>
-    /// <exception cref="NullReferenceException">Thrown when the Mapper is null.</exception>
+    /// <returns>The mapped destination object of type <typeparamref name="TDestination"/>.</returns>
+    /// <exception cref="NullReferenceException">Thrown when the mapper is null.</exception>
     protected TDestination MapTo<TDestination>(object source)
     {
-        if (Mapper is null) throw new NullReferenceException(nameof(Mapper));
-        return Mapper.MapTo<TDestination>(source);
+        return Mapper is null ? throw new NullReferenceException(nameof(Mapper)) : Mapper.MapTo<TDestination>(source);
     }
 
-
-    protected virtual Task<int> InsertAsync(TEntity entity,  CancellationToken token = default)
+    /// <summary>
+    /// Inserts the specified entity into the context asynchronously.
+    /// </summary>
+    /// <param name="entity">The entity to insert.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous insert operation. The task result contains the number of state entries written to the database.</returns>
+    protected virtual Task<int> InsertAsync(TEntity entity, CancellationToken token = default)
     {
-
         Context.Add(entity);
         return Context.SaveChangesAsync(token);
     }
 
-
+    /// <summary>
+    /// Updates the specified entity in the context asynchronously.
+    /// </summary>
+    /// <param name="entity">The entity to update.</param>
+    /// <param name="token">The cancellation token.</param>
+    /// <returns>A task that represents the asynchronous update operation. The task result contains the number of state entries written to the database.</returns>
     protected virtual Task<int> UpdateAsync(TEntity entity, CancellationToken token = default)
     {
         Context.Update(entity);
         return Context.SaveChangesAsync(token);
     }
-
-
-
 }
 
 

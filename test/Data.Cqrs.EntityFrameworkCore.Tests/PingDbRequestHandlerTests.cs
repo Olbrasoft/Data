@@ -12,7 +12,7 @@ public class PingDbRequestHandlerTests : IDisposable
     public PingLibraryDbContext CreateContext()
     {
 
-        var context = new PingLibraryDbContext(_options);
+        PingLibraryDbContext context = new(_options);
 
         context.Database.EnsureDeleted();
         context.Database.EnsureCreated();
@@ -48,12 +48,12 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task ShouldReturnTrueWithOutPredicate()
     {
         //Arrange
-        var context = CreateContext();
+        PingLibraryDbContext context = CreateContext();
 
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.ExistsAsync();
+        bool result = await handler.ExistsAsync();
 
         //Assert
         Assert.True(result);
@@ -67,10 +67,10 @@ public class PingDbRequestHandlerTests : IDisposable
     {
         //Arrange
 
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.ExistsAsync(x => x.Id == 5);
+        bool result = await handler.ExistsAsync(x => x.Id == 5);
 
         //Assert
         Assert.False(result);
@@ -84,10 +84,10 @@ public class PingDbRequestHandlerTests : IDisposable
     {
         //Arrange
 
-        var handler = new PingDbRequestHandler(_context);
+        PingDbRequestHandler handler = new(_context);
 
         //Act
-        var result = await handler.ExistsAsync(x => x.Id == 1);
+        bool result = await handler.ExistsAsync(x => x.Id == 1);
 
         //Assert
         Assert.True(result);
@@ -98,10 +98,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public void ShouldReturnBook3()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(_context);
+        PingDbRequestHandler handler = new(_context);
 
         //Act
-        var result = handler.GetOrderByDescending(x => x.Id).First().Title;
+        string result = handler.GetOrderByDescending(x => x.Id).First().Title;
 
         //Assert
         Assert.Equal("Book3", result);
@@ -113,13 +113,13 @@ public class PingDbRequestHandlerTests : IDisposable
     public void ShouldReturnBook1()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(_context);
+        PingDbRequestHandler handler = new(_context);
 
         _context.Books.Add(new PingBook { Title = "aaa" });
         _context.SaveChanges();
 
         //Act
-        var result = handler.GetOrderBy(x => x.Title).First().Title;
+        string result = handler.GetOrderBy(x => x.Title).First().Title;
 
         _context.Books.RemoveRange(_context.Books.Where(x => x.Title == "aaa"));
         _context.SaveChanges();
@@ -134,10 +134,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public void GetWher_ShouldReturnBook1()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(_context);
+        PingDbRequestHandler handler = new(_context);
 
         //Act
-        var result = handler.GetWhere(x => x.Title == "Book2").First().Title;
+        string result = handler.Where(x => x.Title == "Book2").First().Title;
 
         //Assert
         Assert.Equal("Book2", result);
@@ -149,10 +149,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithQueryable_ShouldReturnBook1()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = (await handler.GetOneOrNullAsync(handler.GetWhere(x => x.Title == "Book1"), default))?.Title;
+        string? result = (await handler.GetOneOrNullAsync(handler.Where(x => x.Title == "Book1"), default))?.Title;
 
         //Assert
         result.Should().Be("Book1");
@@ -164,10 +164,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithQueryable_ShouldReturnNull()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.GetOneOrNullAsync(handler.GetWhere(x => x.Title == "Book5"), default);
+        PingBook? result = await handler.GetOneOrNullAsync(handler.Where(x => x.Title == "Book5"), default);
 
         //Assert
         result.Should().BeNull();
@@ -178,10 +178,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithExpression_ShouldReturnBook3()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = (await handler.GetOneOrNullAsync(x => x.Id == 3, default))?.Title;
+        string? result = (await handler.GetOneOrNullAsync(x => x.Id == 3, default))?.Title;
 
         //Assert
         result.Should().Be("Book3");
@@ -193,10 +193,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithExpression_ShouldReturnNull()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.GetOneOrNullAsync(x => x.Id == 5, default);
+        PingBook? result = await handler.GetOneOrNullAsync(x => x.Id == 5, default);
 
         //Assert
         result.Should().BeNull();
@@ -207,10 +207,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetEnumerableAsync_ShouldReturn2Books()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.GetEnumerableAsync(handler.GetWhere(x => x.Id > 1), default);
+        IEnumerable<PingBook> result = await handler.GetEnumerableAsync(handler.Where(x => x.Id > 1), default);
 
         //Assert
         result.Should().HaveCount(2);
@@ -222,10 +222,10 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetEnumerableAsync_WithExpression_ShouldReturn2Books()
     {
         //Arrange
-        var handler = new PingDbRequestHandler(CreateContext());
+        PingDbRequestHandler handler = new(CreateContext());
 
         //Act
-        var result = await handler.GetEnumerableAsync(x => x.Id > 1, default);
+        IEnumerable<PingBook> result = await handler.GetEnumerableAsync(x => x.Id > 1, default);
 
         //Assert
         result.Should().HaveCount(2);
@@ -236,11 +236,11 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetEnumerableAsync_WithTDestinationAndExpression_ShouldReturn2Books()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var handler = new PingDbRequestHandler(projector, CreateContext());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        PingDbRequestHandler handler = new(projector, CreateContext());
 
         //Act
-        var result = await handler.GetEnumerableAsync<PingDtoBook>(x => x.Id > 1, default);
+        IEnumerable<PingDtoBook> result = await handler.GetEnumerableAsync<PingDtoBook>(x => x.Id > 1, default);
 
         //Assert
         result.Should().HaveCount(2);
@@ -251,11 +251,11 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithTDestination_ShouldReturnBook1()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var handler = new PingDbRequestHandler(projector, CreateContext());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        PingDbRequestHandler handler = new(projector, CreateContext());
 
         //Act
-        var result = (await handler.GetOneOrNullAsync<PingDtoBook>(handler.GetWhere(x => x.Title == "Book1"), default))?.Title;
+        string? result = (await handler.GetOneOrNullAsync<PingDtoBook>(handler.Where(x => x.Title == "Book1"), default))?.Title;
 
         //Assert
         result.Should().Be("Book1");
@@ -268,11 +268,11 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithTDestinationAndExpression_ShouldReturnBook3()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var handler = new PingDbRequestHandler(projector, CreateContext());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        PingDbRequestHandler handler = new(projector, CreateContext());
 
         //Act
-        var result = (await handler.GetOneOrNullAsync<PingDtoBook>(x => x.Id == 3, default))?.Title;
+        string? result = (await handler.GetOneOrNullAsync<PingDtoBook>(x => x.Id == 3, default))?.Title;
 
         //Assert
         result.Should().Be("Book3");
@@ -283,11 +283,11 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetEnumerableAsync_WithTDestination_ShouldReturn3Books()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var handler = new PingDbRequestHandler(projector, CreateContext());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        PingDbRequestHandler handler = new(projector, CreateContext());
 
         //Act
-        var result = await handler.GetEnumerableAsync<PingDtoBook>(handler.GetWhere(x => x.Id > 0), default);
+        IEnumerable<PingDtoBook> result = await handler.GetEnumerableAsync<PingDtoBook>(handler.Where(x => x.Id > 0), default);
 
         //Assert
         result.Should().HaveCount(3);
@@ -298,11 +298,11 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetEnumerableAsync_WithTDestinationAndQueryable_ShouldReturn3Books()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var handler = new PingDbRequestHandler(projector, CreateContext());
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        PingDbRequestHandler handler = new(projector, CreateContext());
 
         //Act
-        var result = await handler.GetEnumerableAsync<PingDtoBook>(default);
+        IEnumerable<PingDtoBook> result = await handler.GetEnumerableAsync<PingDtoBook>(default);
 
         //Assert
         result.Should().HaveCount(3);
@@ -314,19 +314,19 @@ public class PingDbRequestHandlerTests : IDisposable
     public async Task GetOneOrNullAsync_WithTDestination_ShouldReturnNull()
     {
         //Arrange
-        var projector = new Olbrasoft.Mapping.Mapster.MapsterProjector(new Mapster.TypeAdapterConfig());
-        var contextOptions = new DbContextOptionsBuilder<PingLibraryDbContext>()
+        Olbrasoft.Mapping.Mapster.MapsterProjector projector = new(new Mapster.TypeAdapterConfig());
+        DbContextOptions<PingLibraryDbContext> contextOptions = new DbContextOptionsBuilder<PingLibraryDbContext>()
      .UseInMemoryDatabase(new Guid().ToString())
      .Options;
 
-        using var context = new PingLibraryDbContext(contextOptions);
+        using PingLibraryDbContext context = new(contextOptions);
 
         context.Database.EnsureCreated();
 
-        var handler = new PingDbRequestHandler(projector, context);
+        PingDbRequestHandler handler = new(projector, context);
 
         //Act
-        var result = await handler.GetOneOrNullAsync<PingDtoBook>(handler.GetWhere(x => x.Id == 1000), default);
+        PingDtoBook? result = await handler.GetOneOrNullAsync<PingDtoBook>(handler.Where(x => x.Id == 1000), default);
 
         context.Database.EnsureDeleted();
 

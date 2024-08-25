@@ -1,7 +1,8 @@
-﻿namespace Data.Cqrs.EntityFrameworkCore.Tests;
-public class PingBook
+﻿using Olbrasoft.Data.Entities.Abstractions;
+
+namespace Data.Cqrs.EntityFrameworkCore.Tests;
+public class PingBook : BaseEnity
 {
-    public int Id { get; set; }
 
     public string Title { get; set; } = string.Empty;
 

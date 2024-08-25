@@ -48,7 +48,7 @@ public class PingDbCommandHandler : DbCommandHandler<PingLibraryDbContext, PingB
 
     public static void CallThrowIfCommandIsNullOrCancellationRequested(BaseCommand<string> command, CancellationToken token) => ThrowIfCommandIsNullOrCancellationRequested(command, token);
 
-    public new PingBook MapCommandToNewEntity(BaseCommand<string> command) => base.MapCommandToNewEntity(command);
+    public new PingBook CreateEntity(BaseCommand<string> command) => base.CreateEntity(command);
 
 
 
@@ -56,7 +56,7 @@ public class PingDbCommandHandler : DbCommandHandler<PingLibraryDbContext, PingB
 
     public new TDestination MapTo<TDestination>(object source) => base.MapTo<TDestination>(source);
 
-
+    public new Task<int> InsertAsync(PingBook entity, CancellationToken token) => base.InsertAsync(entity, token);
 
 }
 

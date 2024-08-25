@@ -10,14 +10,16 @@ public static class ServiceCollectionExtensions
     public static CqrsBuilder AddCqrs(this IServiceCollection services, params Assembly[] assemblies)
     {
 
-        return services.AddCqrs(cfg => cfg.RegisterServicesFromAssemblies(assemblies) );
+        return services.AddCqrs(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
 
     }
 
     public static CqrsBuilder AddCqrs(this IServiceCollection services, ServiceLifetime lifetime = ServiceLifetime.Transient, params Assembly[] assemblies)
     {
 
-        return services.AddCqrs(cfg => {
+        return services.AddCqrs(cfg =>
+        {
+
             cfg.RegisterServicesFromAssemblies(assemblies);
             cfg.Lifetime = lifetime;
 
@@ -28,7 +30,7 @@ public static class ServiceCollectionExtensions
 
     public static CqrsBuilder AddCqrs(this IServiceCollection services, Action<CqrsServiceConfiguration> configuration)
     {
-        var serviceConfig = new CqrsServiceConfiguration();
+        CqrsServiceConfiguration serviceConfig = new();
 
         configuration.Invoke(serviceConfig);
 
@@ -38,22 +40,26 @@ public static class ServiceCollectionExtensions
     }
 
 
-    public static CqrsBuilder AddCqrs(this IServiceCollection services,CqrsServiceConfiguration configuration)
+    public static CqrsBuilder AddCqrs(this IServiceCollection services, CqrsServiceConfiguration configuration)
     {
 
         if (configuration.AssembliesToRegister.Any())
         {
-             var builder = services.AddMediation([.. configuration.AssembliesToRegister]);
-             
-            if(configuration.MediatorImplementationType == typeof(DynamicMediator))
+            MediationBuilder builder = services.AddMediation([.. configuration.AssembliesToRegister]);
+
+            if (configuration.MediatorImplementationType == typeof(DynamicMediator))
             {
                 builder.UseDynamicMediator(configuration.Lifetime);
             }
-          
-            if(configuration.MediatorImplementationType == typeof(RequestHandlerMediator))
+            else if (configuration.MediatorImplementationType == typeof(RequestHandlerMediator))
             {
                 builder.UseRequestHandlerMediator(configuration.Lifetime);
             }
+            else
+            {
+                throw new InvalidOperationException("Invalid mediator implementation type");
+            }
+
 
             services.TryAdd(new ServiceDescriptor(typeof(ICommandExecutor), configuration.CommandExecutorImplementationType, configuration.Lifetime));
             services.TryAdd(new ServiceDescriptor(typeof(IQueryProcessor), configuration.QueryProcessorImplementationType, configuration.Lifetime));
