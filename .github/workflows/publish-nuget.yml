@@ -39,17 +39,17 @@ jobs:
       run: dotnet --info
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore Data.sln
 
     - name: Build solution
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build Data.sln --configuration Release --no-restore
 
     - name: Run tests
-      run: dotnet test --configuration Release --no-build --verbosity normal
+      run: dotnet test Data.sln --configuration Release --no-build --verbosity normal
 
     - name: Pack NuGet packages
       if: success()
-      run: dotnet pack --configuration Release --no-build --output ./artifacts
+      run: dotnet pack Data.sln --configuration Release --no-build --output ./artifacts
 
     - name: List artifacts
       if: success()
