@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-		<LangVersion>12</LangVersion>
+		<LangVersion>13</LangVersion>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<Authors>Jiří Tůma</Authors>
@@ -14,7 +14,7 @@
 		<RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageTags>CQS CQRS EntityFrameworkCore</PackageTags>
-		<Version>1.7.0</Version>
+		<Version>1.8.0</Version>
 		<RootNamespace>Olbrasoft.Data.Cqrs.EntityFrameworkCore</RootNamespace>
 		<AssemblyName>Olbrasoft.Data.Cqrs.EntityFrameworkCore</AssemblyName>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -51,11 +51,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
-	</ItemGroup>
-
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Data.Cqrs.Common\Data.Cqrs.Common.csproj" />
+		<PackageReference Include="Olbrasoft.Data.Cqrs.Common" Version="1.7.0" />
 	</ItemGroup>
 
 
