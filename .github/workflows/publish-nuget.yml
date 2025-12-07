@@ -41,6 +41,7 @@ jobs:
     - name: Restore dependencies
       run: |
         dotnet restore src/Data.Entities.Abstractions/Data.Entities.Abstractions.csproj
+        dotnet restore src/Data.Entities.Identity/Data.Entities.Identity.csproj
         dotnet restore src/Data.Cqrs.Common/Data.Cqrs.Common.csproj
         dotnet restore src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj
         dotnet restore src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj
@@ -51,6 +52,7 @@ jobs:
     - name: Build projects
       run: |
         dotnet build src/Data.Entities.Abstractions/Data.Entities.Abstractions.csproj --configuration Release --no-restore
+        dotnet build src/Data.Entities.Identity/Data.Entities.Identity.csproj --configuration Release --no-restore
         dotnet build src/Data.Cqrs.Common/Data.Cqrs.Common.csproj --configuration Release --no-restore
         dotnet build src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj --configuration Release --no-restore
         dotnet build src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj --configuration Release --no-restore
@@ -66,6 +68,7 @@ jobs:
       if: success()
       run: |
         dotnet pack src/Data.Entities.Abstractions/Data.Entities.Abstractions.csproj --configuration Release --no-build --output ./artifacts
+        dotnet pack src/Data.Entities.Identity/Data.Entities.Identity.csproj --configuration Release --no-build --output ./artifacts
         dotnet pack src/Data.Cqrs.Common/Data.Cqrs.Common.csproj --configuration Release --no-build --output ./artifacts
         dotnet pack src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj --configuration Release --no-build --output ./artifacts
         dotnet pack src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj --configuration Release --no-build --output ./artifacts
