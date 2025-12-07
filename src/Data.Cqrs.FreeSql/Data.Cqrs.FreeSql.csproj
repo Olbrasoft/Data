@@ -1,25 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
-	  <LangVersion>12</LangVersion>
+    <LangVersion>13</LangVersion>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-	  <Authors>Jiří Tůma</Authors>
-	  <Company>Olbrasoft</Company>
-	  <Description>CQS and CQRS for EntityFrameworkCore</Description>
-	  <Copyright>Copyright @2022 Olbrasoft</Copyright>
-	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
-	  <PackageIcon>olbrasoft-data-cqrs.png</PackageIcon>
-	  <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
-	  <RepositoryType>git</RepositoryType>
-	  <PackageTags>CQS CQRS FreeSql</PackageTags>
-	  <Version>1.7.0</Version>
-	  <RootNamespace>Olbrasoft.Data.Cqrs.FreeSql</RootNamespace>
-	  <AssemblyName>Olbrasoft.Data.Cqrs.FreeSql</AssemblyName>
-	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	  <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
-	  <IncludeSymbols>True</IncludeSymbols>
-	  <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Authors>Jiří Tůma</Authors>
+    <Company>Olbrasoft</Company>
+    <Description>CQS and CQRS for FreeSql</Description>
+    <Copyright>Copyright @2022 Olbrasoft</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageIcon>olbrasoft-data-cqrs.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>CQS CQRS FreeSql</PackageTags>
+    <Version>1.8.0</Version>
+    <RootNamespace>Olbrasoft.Data.Cqrs.FreeSql</RootNamespace>
+    <AssemblyName>Olbrasoft.Data.Cqrs.FreeSql</AssemblyName>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,21 +32,18 @@
   <ItemGroup>
     <PackageReference Include="FreeSql.DbContext" Version="3.2.833" />
     <PackageReference Include="Olbrasoft.Extensions" Version="1.8.0" />
-	  <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.7.0" />
+    <PackageReference Include="Olbrasoft.Data.Sorting" Version="1.7.0" />
     <PackageReference Include="Olbrasoft.Mapping.Abstractions" Version="7.3.2" />
+    <PackageReference Include="Olbrasoft.Data.Cqrs.Common" Version="1.8.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Data.Cqrs.Common\Data.Cqrs.Common.csproj" />
+    <Using Include="FreeSql" />
+    <Using Include="Olbrasoft.Mapping" />
+    <Using Include="Olbrasoft.Mediation" />
+    <Using Include="Olbrasoft.Mediation.Abstractions" />
+    <Using Include="Olbrasoft.Data.Cqrs" />
+    <Using Include="System.Linq.Expressions" />
+    <Using Include="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
-
-	<ItemGroup>
-		<Using Include="FreeSql" />
-		<Using Include="Olbrasoft.Mapping" />
-		<Using Include="Olbrasoft.Mediation" />
-		<Using Include="Olbrasoft.Mediation.Abstractions" />
-		<Using Include="Olbrasoft.Data.Cqrs" />
-		<Using Include="System.Linq.Expressions" />
-		<Using Include="Microsoft.Extensions.DependencyInjection" />
-	</ItemGroup>
 </Project>
