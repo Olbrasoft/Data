@@ -44,6 +44,9 @@ jobs:
         dotnet restore src/Data.Cqrs.Common/Data.Cqrs.Common.csproj
         dotnet restore src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj
         dotnet restore src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj
+        dotnet restore src/Data.Paging/Data.Paging.csproj
+        dotnet restore src/Data.Sorting/Data.Sorting.csproj
+        dotnet restore src/Data.Sorting.Extensions/Data.Sorting.Extensions.csproj
 
     - name: Build projects
       run: |
@@ -51,6 +54,9 @@ jobs:
         dotnet build src/Data.Cqrs.Common/Data.Cqrs.Common.csproj --configuration Release --no-restore
         dotnet build src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj --configuration Release --no-restore
         dotnet build src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj --configuration Release --no-restore
+        dotnet build src/Data.Paging/Data.Paging.csproj --configuration Release --no-restore
+        dotnet build src/Data.Sorting/Data.Sorting.csproj --configuration Release --no-restore
+        dotnet build src/Data.Sorting.Extensions/Data.Sorting.Extensions.csproj --configuration Release --no-restore
 
     - name: Run tests
       run: |
@@ -63,6 +69,9 @@ jobs:
         dotnet pack src/Data.Cqrs.Common/Data.Cqrs.Common.csproj --configuration Release --no-build --output ./artifacts
         dotnet pack src/Data.Cqrs.EntityFrameworkCore/Data.Cqrs.EntityFrameworkCore.csproj --configuration Release --no-build --output ./artifacts
         dotnet pack src/Data.Cqrs.FreeSql/Data.Cqrs.FreeSql.csproj --configuration Release --no-build --output ./artifacts
+        dotnet pack src/Data.Paging/Data.Paging.csproj --configuration Release --no-build --output ./artifacts
+        dotnet pack src/Data.Sorting/Data.Sorting.csproj --configuration Release --no-build --output ./artifacts
+        dotnet pack src/Data.Sorting.Extensions/Data.Sorting.Extensions.csproj --configuration Release --no-build --output ./artifacts
 
     - name: List artifacts
       if: success()

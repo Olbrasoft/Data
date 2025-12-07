@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard2.1;netstandard1.6;Net6;Net7</TargetFrameworks>
-    <LangVersion>11.0</LangVersion>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net6.0;net7.0;net8.0</TargetFrameworks>
+    <LangVersion>12</LangVersion>
     <nullable>enable</nullable>
     <AssemblyName>Olbrasoft.Data.Sorting</AssemblyName>
     <RootNamespace>Olbrasoft.Data.Sorting</RootNamespace>
@@ -15,7 +15,7 @@
     <RepositoryUrl>https://github.com/Olbrasoft/Data</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
     <PackageTags>Data Sorting</PackageTags>
-    <Version>1.7.0</Version>
+    <Version>1.8.0</Version>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
