@@ -40,6 +40,7 @@ dotnet add package Olbrasoft.Data.Cqrs.Common
 
 **Features:**
 - Base query and command interfaces
+- **C# Records Support** - Full support for record-based queries and commands
 - Result type abstractions
 - Generic repository patterns
 - Mediator pattern support via `Olbrasoft.Mediation`
@@ -181,6 +182,301 @@ public class GetUsersQueryHandler : QueryHandler<GetUsersQuery, List<UserDto>>
     }
 }
 ```
+
+## 📝 Using C# Records with CQRS
+
+The library fully supports C# records for queries and commands, bringing benefits like immutability, value equality, and concise syntax perfect for CQRS patterns.
+
+### Simple Record Query
+
+```csharp
+using Olbrasoft.Data.Cqrs;
+
+// Record query with primary constructor
+public record GetProductByIdQuery(int ProductId) : IQuery<ProductDto>;
+
+// Record DTO for response
+public record ProductDto(int Id, string Name, decimal Price, string Category);
+
+// Query handler
+public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, ProductDto>
+{
+    private readonly MyDbContext _context;
+
+    public GetProductByIdQueryHandler(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<ProductDto> HandleAsync(GetProductByIdQuery query, CancellationToken cancellationToken)
+    {
+        var product = await _context.Products
+            .Where(p => p.Id == query.ProductId)
+            .Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Category))
+            .FirstOrDefaultAsync(cancellationToken);
+
+        return product;
+    }
+}
+```
+
+### Record Query with Multiple Properties
+
+```csharp
+// Query with filtering and pagination
+public record SearchProductsQuery(
+    string SearchTerm,
+    string Category,
+    int PageSize,
+    int PageNumber
+) : IQuery<List<ProductDto>>;
+
+// Handler with EF Core
+public class SearchProductsQueryHandler : IQueryHandler<SearchProductsQuery, List<ProductDto>>
+{
+    private readonly MyDbContext _context;
+
+    public SearchProductsQueryHandler(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<List<ProductDto>> HandleAsync(SearchProductsQuery query, CancellationToken cancellationToken)
+    {
+        var products = await _context.Products
+            .Where(p => p.Category == query.Category && p.Name.Contains(query.SearchTerm))
+            .Skip((query.PageNumber - 1) * query.PageSize)
+            .Take(query.PageSize)
+            .Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Category))
+            .ToListAsync(cancellationToken);
+
+        return products;
+    }
+}
+```
+
+### Record Command for Creating Entities
+
+```csharp
+// Command with record
+public record CreateProductCommand(
+    string Name,
+    decimal Price,
+    string Category,
+    bool IsActive
+) : ICommand<int>;
+
+// Command handler
+public class CreateProductCommandHandler : ICommandHandler<CreateProductCommand, int>
+{
+    private readonly MyDbContext _context;
+
+    public CreateProductCommandHandler(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<int> HandleAsync(CreateProductCommand command, CancellationToken cancellationToken)
+    {
+        var product = new Product
+        {
+            Name = command.Name,
+            Price = command.Price,
+            Category = command.Category,
+            IsActive = command.IsActive
+        };
+
+        _context.Products.Add(product);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return product.Id;
+    }
+}
+```
+
+### Record Command for Updates
+
+```csharp
+// Update command
+public record UpdateProductPriceCommand(int ProductId, decimal NewPrice) : ICommand<bool>;
+
+// Command handler
+public class UpdateProductPriceCommandHandler : ICommandHandler<UpdateProductPriceCommand, bool>
+{
+    private readonly MyDbContext _context;
+
+    public UpdateProductPriceCommandHandler(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<bool> HandleAsync(UpdateProductPriceCommand command, CancellationToken cancellationToken)
+    {
+        var product = await _context.Products.FindAsync(
+            new object[] { command.ProductId },
+            cancellationToken
+        );
+
+        if (product == null)
+            return false;
+
+        product.Price = command.NewPrice;
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return true;
+    }
+}
+```
+
+### Nested Record Structures
+
+```csharp
+// Complex command with nested records
+public record CreateOrderCommand(
+    int CustomerId,
+    OrderDetails Details,
+    ShippingInfo Shipping
+) : ICommand<int>;
+
+public record OrderDetails(
+    List<OrderItem> Items,
+    decimal TotalAmount
+);
+
+public record OrderItem(int ProductId, int Quantity, decimal UnitPrice);
+
+public record ShippingInfo(string Address, string City, string ZipCode);
+
+// Handler
+public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand, int>
+{
+    private readonly MyDbContext _context;
+
+    public CreateOrderCommandHandler(MyDbContext context)
+    {
+        _context = context;
+    }
+
+    public async Task<int> HandleAsync(CreateOrderCommand command, CancellationToken cancellationToken)
+    {
+        var order = new Order
+        {
+            CustomerId = command.CustomerId,
+            TotalAmount = command.Details.TotalAmount,
+            ShippingAddress = command.Shipping.Address,
+            ShippingCity = command.Shipping.City,
+            ShippingZipCode = command.Shipping.ZipCode
+        };
+
+        foreach (var item in command.Details.Items)
+        {
+            order.OrderItems.Add(new OrderItem
+            {
+                ProductId = item.ProductId,
+                Quantity = item.Quantity,
+                UnitPrice = item.UnitPrice
+            });
+        }
+
+        _context.Orders.Add(order);
+        await _context.SaveChangesAsync(cancellationToken);
+
+        return order.Id;
+    }
+}
+```
+
+### Record Immutability with `with` Expression
+
+```csharp
+// Original query
+var query = new SearchProductsQuery("laptop", "Electronics", PageSize: 10, PageNumber: 1);
+
+// Create modified copy for next page
+var nextPageQuery = query with { PageNumber = 2 };
+
+// Original remains unchanged
+Console.WriteLine(query.PageNumber);      // 1
+Console.WriteLine(nextPageQuery.PageNumber); // 2
+```
+
+### Complete CRUD Example with Records
+
+```csharp
+// Queries
+public record GetAllProductsQuery : IQuery<List<ProductDto>>;
+public record GetProductByIdQuery(int Id) : IQuery<ProductDto?>;
+public record SearchProductsQuery(string SearchTerm) : IQuery<List<ProductDto>>;
+
+// Commands
+public record CreateProductCommand(string Name, decimal Price) : ICommand<int>;
+public record UpdateProductCommand(int Id, string Name, decimal Price) : ICommand<bool>;
+public record DeleteProductCommand(int Id) : ICommand<bool>;
+
+// DTOs
+public record ProductDto(int Id, string Name, decimal Price, DateTime CreatedAt);
+
+// Usage in controller
+[ApiController]
+[Route("api/[controller]")]
+public class ProductsController : ControllerBase
+{
+    private readonly IMediator _mediator;
+
+    public ProductsController(IMediator mediator)
+    {
+        _mediator = mediator;
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<List<ProductDto>>> GetAll()
+    {
+        var products = await _mediator.MediateAsync<List<ProductDto>>(new GetAllProductsQuery());
+        return Ok(products);
+    }
+
+    [HttpGet("{id}")]
+    public async Task<ActionResult<ProductDto>> GetById(int id)
+    {
+        var product = await _mediator.MediateAsync<ProductDto?>(new GetProductByIdQuery(id));
+        return product == null ? NotFound() : Ok(product);
+    }
+
+    [HttpPost]
+    public async Task<ActionResult<int>> Create(CreateProductCommand command)
+    {
+        var productId = await _mediator.MediateAsync<int>(command);
+        return CreatedAtAction(nameof(GetById), new { id = productId }, productId);
+    }
+
+    [HttpPut("{id}")]
+    public async Task<ActionResult> Update(int id, UpdateProductCommand command)
+    {
+        if (id != command.Id)
+            return BadRequest();
+
+        var success = await _mediator.MediateAsync<bool>(command);
+        return success ? NoContent() : NotFound();
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(int id)
+    {
+        var success = await _mediator.MediateAsync<bool>(new DeleteProductCommand(id));
+        return success ? NoContent() : NotFound();
+    }
+}
+```
+
+### Why Use Records for CQRS?
+
+- **Immutability**: Queries and commands shouldn't change after creation
+- **Value Equality**: Compare queries/commands by their values, not references
+- **Concise Syntax**: Less boilerplate with primary constructors
+- **Thread-Safe**: Immutable objects are inherently thread-safe
+- **Clear Intent**: Records communicate that these are data transfer objects
+- **Pattern Matching**: Work seamlessly with C# pattern matching features
+- **EF Core Compatible**: Records work perfectly with EF Core queries and projections
 
 ## 📋 Multi-Targeting Support
 
