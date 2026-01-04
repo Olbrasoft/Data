@@ -193,13 +193,13 @@ The library fully supports C# records for queries and commands, bringing benefit
 using Olbrasoft.Data.Cqrs;
 
 // Record query with primary constructor
-public record GetProductByIdQuery(int ProductId) : IQuery<ProductDto>;
+public record GetProductByIdQuery(int ProductId) : IQuery<ProductDto?>;
 
 // Record DTO for response
-public record ProductDto(int Id, string Name, decimal Price, string Category);
+public record ProductDto(int Id, string Name, decimal Price);
 
 // Query handler
-public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, ProductDto>
+public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, ProductDto?>
 {
     private readonly MyDbContext _context;
 
@@ -208,14 +208,14 @@ public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, Pro
         _context = context;
     }
 
-    public async Task<ProductDto> HandleAsync(GetProductByIdQuery query, CancellationToken cancellationToken)
+    public async Task<ProductDto?> HandleAsync(GetProductByIdQuery query, CancellationToken cancellationToken)
     {
         var product = await _context.Products
             .Where(p => p.Id == query.ProductId)
-            .Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Category))
+            .Select(p => new ProductDto(p.Id, p.Name, p.Price))
             .FirstOrDefaultAsync(cancellationToken);
 
-        return product;
+        return product; // Can be null if product not found
     }
 }
 ```
@@ -247,7 +247,7 @@ public class SearchProductsQueryHandler : IQueryHandler<SearchProductsQuery, Lis
             .Where(p => p.Category == query.Category && p.Name.Contains(query.SearchTerm))
             .Skip((query.PageNumber - 1) * query.PageSize)
             .Take(query.PageSize)
-            .Select(p => new ProductDto(p.Id, p.Name, p.Price, p.Category))
+            .Select(p => new ProductDto(p.Id, p.Name, p.Price))
             .ToListAsync(cancellationToken);
 
         return products;
@@ -389,8 +389,8 @@ public class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand, int
 ### Record Immutability with `with` Expression
 
 ```csharp
-// Original query
-var query = new SearchProductsQuery("laptop", "Electronics", PageSize: 10, PageNumber: 1);
+// Original query (positional parameters)
+var query = new SearchProductsQuery("laptop", "Electronics", 10, 1);
 
 // Create modified copy for next page
 var nextPageQuery = query with { PageNumber = 2 };
@@ -414,7 +414,7 @@ public record UpdateProductCommand(int Id, string Name, decimal Price) : IComman
 public record DeleteProductCommand(int Id) : ICommand<bool>;
 
 // DTOs
-public record ProductDto(int Id, string Name, decimal Price, DateTime CreatedAt);
+public record ProductDto(int Id, string Name, decimal Price);
 
 // Usage in controller
 [ApiController]
