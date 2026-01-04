@@ -1,11 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Olbrasoft.Data.Cqrs;
-using Olbrasoft.Mapping.Mapster;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace Data.Cqrs.EntityFrameworkCore.Tests;
 
 /// <summary>
@@ -29,10 +21,6 @@ public class RecordQueryCommandTests : IDisposable
     // Record DTO for query results
     public record ProductDto(int Id, string Name, decimal Price);
 
-    // Record DTO with nested record
-    public record ProductWithCategoryDto(int Id, string Name, CategoryInfo Category);
-    public record CategoryInfo(string Name);
-
     #endregion
 
     #region Test Record Queries
@@ -42,12 +30,6 @@ public class RecordQueryCommandTests : IDisposable
 
     // Record query with multiple properties
     public record GetProductsByCategoryQuery(string Category, bool ActiveOnly) : IQuery<List<Product>>;
-
-    // Generic record query
-    public record GenericQuery<T>(System.Linq.Expressions.Expression<System.Func<Product, bool>> Predicate) : IQuery<List<T>>;
-
-    // Record query returning record DTO
-    public record GetProductDtoQuery(int ProductId) : IQuery<ProductDto?>;
 
     // Record query with nested record result
     public record SearchProductsQuery(string SearchTerm, int MaxResults) : IQuery<List<ProductDto>>;
@@ -70,9 +52,6 @@ public class RecordQueryCommandTests : IDisposable
     ) : ICommand<int>;
 
     public record ProductDetails(string Category, bool IsActive);
-
-    // Record command returning record DTO
-    public record GetOrCreateProductCommand(string Name) : ICommand<ProductDto>;
 
     #endregion
 
@@ -245,7 +224,7 @@ public class RecordQueryCommandTests : IDisposable
     {
         // Use unique database per test class instance (best practice)
         var options = new DbContextOptionsBuilder<ProductDbContext>()
-            .UseInMemoryDatabase(databaseName: $"ProductTestDb_{System.Guid.NewGuid()}")
+            .UseInMemoryDatabase(databaseName: $"ProductTestDb_{Guid.NewGuid()}")
             .Options;
 
         _context = new ProductDbContext(options);
