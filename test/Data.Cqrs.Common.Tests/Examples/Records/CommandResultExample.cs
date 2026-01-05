@@ -232,7 +232,7 @@ public class CommandResultExample
         var createHandler = new CreateProductHandler(repository);
         var createResult = await createHandler.HandleAsync(createCommand, CancellationToken.None);
 
-        var updateCommand = new UpdateProductPriceCommand(createResult.Data!,1500.00m);
+        var updateCommand = new UpdateProductPriceCommand(createResult.Data!, 1500.00m);
         var updateHandler = new UpdateProductPriceHandler(repository);
 
         // Act

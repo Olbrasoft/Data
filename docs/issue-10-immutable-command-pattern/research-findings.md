@@ -95,7 +95,7 @@ public record CreateUserCommand(string Name, string Email) : IRequest<int>;
 // Handler returns result directly
 public class CreateUserHandler : IRequestHandler<CreateUserCommand, int>
 {
-    public async Task<int> HandleAsync(CreateUserCommand request, CancellationToken ct)
+    public async Task<int> Handle(CreateUserCommand request, CancellationToken ct)
     {
         // Implementation
         return userId;

@@ -313,7 +313,7 @@ public class RecordVsClassComparisonExample
         classCommand.Status.Should().Be(CommandStatus.Success);
 
         // Record command has no Status property
-        var recordCommand = new UpdateProductPriceRecordCommand(1, 1500.00m);
+        _ = new UpdateProductPriceRecordCommand(1, 1500.00m);
         // recordCommand.Status - Property doesn't exist
     }
 

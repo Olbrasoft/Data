@@ -216,6 +216,9 @@ public record CommandResult<T>
 
     /// <summary>
     /// Executes an action if the command succeeded.
+    /// Note: Action is only called when Data is not null.
+    /// For successful results with null data (e.g., Deleted, Unchanged),
+    /// the action will not execute.
     /// </summary>
     /// <param name="action">The action to execute with the data.</param>
     /// <returns>This command result for chaining.</returns>
@@ -242,6 +245,9 @@ public record CommandResult<T>
 
     /// <summary>
     /// Maps the result data to a new type if successful.
+    /// Note: For successful results with null data (e.g., Deleted, Unchanged),
+    /// the mapper will not be called and the result will preserve the success
+    /// state with default(TNew) as data.
     /// </summary>
     /// <typeparam name="TNew">The new result type.</typeparam>
     /// <param name="mapper">The mapping function.</param>
@@ -259,9 +265,10 @@ public record CommandResult<T>
             );
         }
 
+        // Preserve original success/failure state even if Data is null
         return new CommandResult<TNew>(
             data: default,
-            isSuccess: false,
+            isSuccess: IsSuccess,
             status: Status,
             errorMessage: ErrorMessage,
             processedAt: ProcessedAt

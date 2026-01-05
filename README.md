@@ -339,11 +339,11 @@ public record CreateOrderCommand(
 ) : ICommand<int>;
 
 public record OrderDetails(
-    List<OrderItem> Items,
+    List<OrderItemDto> Items,
     decimal TotalAmount
 );
 
-public record OrderItem(int ProductId, int Quantity, decimal UnitPrice);
+public record OrderItemDto(int ProductId, int Quantity, decimal UnitPrice);
 
 public record ShippingInfo(string Address, string City, string ZipCode);
 
