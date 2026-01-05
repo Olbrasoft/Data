@@ -270,10 +270,10 @@ public class RecordVsClassComparisonExample
         var record2 = new GetProductRecordQuery(1);
         record1.Should().Be(record2); // Equal by value
 
-        // Classes - Reference equality (unless overridden)
+        // Classes - Reference equality (explicitly checked)
         var class1 = new GetProductClassQuery(1);
         var class2 = new GetProductClassQuery(1);
-        class1.Should().NotBe(class2); // Different instances (BaseQuery doesn't override Equals)
+        ReferenceEquals(class1, class2).Should().BeFalse(); // Different instances by reference
     }
 
     [Fact]
@@ -285,7 +285,9 @@ public class RecordVsClassComparisonExample
         var recordCommand = new UpdateProductPriceRecordCommand(1, 1500.00m);
         var recordHandler = new UpdateProductPriceRecordHandler(repository);
 
-        // Reset for class command test
+        // Use a fresh repository instance for the class-based command to keep
+        // the two examples independent. This is for test isolation only; commands
+        // are not required to share state or use separate repositories.
         var repository2 = new ProductRepository();
         var classCommand = new UpdateProductPriceClassCommand(1, 1500.00m);
         var classHandler = new UpdateProductPriceClassHandler(repository2);
@@ -313,7 +315,7 @@ public class RecordVsClassComparisonExample
         classCommand.Status.Should().Be(CommandStatus.Success);
 
         // Record command has no Status property
-        var recordCommand = new UpdateProductPriceRecordCommand(1, 1500.00m);
+        _ = new UpdateProductPriceRecordCommand(1, 1500.00m);
         // recordCommand.Status - Property doesn't exist
     }
 

@@ -201,7 +201,7 @@ public class RecordDtoMappingExample
         var order1 = result[0];
         order1.OrderId.Should().Be(1);
         order1.CustomerName.Should().Be("John Doe");
-        order1.TotalAmount.Should().Be(1250.00m); // 1200 + (25 * 2)
+        order1.TotalAmount.Should().Be(1250.00m); // (1200 * 1) + (25 * 2)
         order1.ItemCount.Should().Be(2);
         order1.Items.Should().HaveCount(2);
     }
@@ -250,17 +250,27 @@ public class RecordDtoMappingExample
     [Fact]
     public void OrderSummaryDto_RecordEquality()
     {
-        // Arrange
-        var items = new List<OrderItemDto>
+        // Arrange - Create two separate list instances with same values
+        var items1 = new List<OrderItemDto>
         {
             new OrderItemDto(1, "Laptop", 1200.00m, 1)
         };
 
-        var dto1 = new OrderSummaryDto(1, "John", 1200.00m, 1, DateTime.MinValue, items);
-        var dto2 = new OrderSummaryDto(1, "John", 1200.00m, 1, DateTime.MinValue, items);
+        var items2 = new List<OrderItemDto>
+        {
+            new OrderItemDto(1, "Laptop", 1200.00m, 1)
+        };
 
-        // Act & Assert - Records use structural equality
-        dto1.Should().Be(dto2);
+        var dto1 = new OrderSummaryDto(1, "John", 1200.00m, 1, DateTime.MinValue, items1);
+        var dto2 = new OrderSummaryDto(1, "John", 1200.00m, 1, DateTime.MinValue, items2);
+
+        // Act & Assert - Records use structural equality for value types and reference equality for reference types
+        // Note: Lists are compared by reference, not by content, so this will fail if items1 != items2
+        dto1.Should().NotBe(dto2); // Different list instances
+
+        // To test value equality, all properties including lists must be the same instance
+        var dto3 = new OrderSummaryDto(1, "John", 1200.00m, 1, DateTime.MinValue, items1);
+        dto1.Should().Be(dto3); // Same list instance
     }
 
     [Fact]

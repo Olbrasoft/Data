@@ -58,6 +58,13 @@ public class SimpleRecordQueryExample
 
             var user = _users.FirstOrDefault(u => u.Id == query.UserId);
 
+            // Note: In this example we throw when the user is not found to demonstrate a
+            // fail-fast pattern for missing data that is considered exceptional.
+            // Other examples in this project (e.g., in the README) return null instead for
+            // "not found" scenarios when the absence of data is expected/optional.
+            // Choose the pattern that best matches your domain:
+            //   - Throw for violated invariants or truly exceptional missing data.
+            //   - Return null (or an optional type) when "not found" is a normal outcome.
             if (user == null)
                 throw new InvalidOperationException($"User with ID {query.UserId} not found");
 

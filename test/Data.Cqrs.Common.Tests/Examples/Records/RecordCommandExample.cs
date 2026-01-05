@@ -137,8 +137,14 @@ public class RecordCommandExample
             if (command.Email != null)
                 user.Email = command.Email;
 
-            var result = _repository.Update(user);
-            return Task.FromResult(result);
+            // Update timestamp
+            user.UpdatedAt = DateTime.UtcNow;
+
+            // In real EF Core scenario, you would call:
+            // await _context.SaveChangesAsync(cancellationToken);
+            // For in-memory list, the object is already modified
+
+            return Task.FromResult(true);
         }
     }
 
@@ -189,8 +195,8 @@ public class RecordCommandExample
         // Arrange
         var command = new CreateUserCommand("John", "john@example.com");
 
-        // Act - Cannot modify properties (compile-time safety)
-        // command.Name = "Jane"; // This won't compile!
+        // Act - Cannot modify properties after construction (compile-time safety for primary constructors)
+        // command.Name = "Jane"; // This won't compile for records with positional parameters!
 
         // Use 'with' expression to create modified copy
         var modifiedCommand = command with { Name = "Jane" };

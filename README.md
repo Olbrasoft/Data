@@ -215,7 +215,9 @@ public class GetProductByIdQueryHandler : IQueryHandler<GetProductByIdQuery, Pro
             .Select(p => new ProductDto(p.Id, p.Name, p.Price))
             .FirstOrDefaultAsync(cancellationToken);
 
-        return product; // Can be null if product not found
+        // Returns null if product not found - appropriate when "not found" is an expected outcome.
+        // Alternative pattern: throw InvalidOperationException if missing data is exceptional.
+        return product;
     }
 }
 ```
@@ -470,7 +472,7 @@ public class ProductsController : ControllerBase
 
 ### Why Use Records for CQRS?
 
-- **Immutability**: Queries and commands shouldn't change after creation
+- **Immutability (especially for queries)**: Queries and read-only DTOs shouldn't change after creation; some commands may legitimately update internal state (e.g., status or validation results)
 - **Value Equality**: Compare queries/commands by their values, not references
 - **Concise Syntax**: Less boilerplate with primary constructors
 - **Thread-Safe**: Immutable objects are inherently thread-safe
